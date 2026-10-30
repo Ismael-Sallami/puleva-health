@@ -76,6 +76,8 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between;
     padding: 18px 6vw; mix-blend-mode: normal;
   }
+  nav { transition: background .35s, backdrop-filter .35s, padding .35s; }
+  nav.scrolled { background: rgba(0,26,77,.78); backdrop-filter: blur(14px); padding-top: 12px; padding-bottom: 12px; box-shadow: 0 10px 30px rgba(0,10,40,.25); }
   .logo { font-weight: 900; font-style: italic; font-size: 22px; letter-spacing: -.02em; color: var(--milk); text-decoration: none; display: flex; align-items: center; gap: 8px; }
   .logo span { font-style: italic; font-size: 11px; background: var(--green); padding: 3px 8px; border-radius: 999px; letter-spacing: .08em; }
   .nav-links { display: flex; gap: 26px; }
@@ -922,6 +924,7 @@ document.querySelectorAll(".m-prod").forEach(img => {
 document.querySelectorAll(".flip").forEach(f => f.addEventListener("click", () => f.classList.toggle("on")));
 // medidor de scroll en forma de bote
 const meterMilk = document.getElementById("meterMilk");
+const navEl = document.querySelector("nav");
 document.getElementById("meter").addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
 
 /* --- Bucle de animación --- */
@@ -933,6 +936,7 @@ function frame() {
   cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2;
   cursor.style.transform = `translate(${cx}px, ${cy}px) rotate(-45deg)`;
   const prog = scrollY / (document.body.scrollHeight - innerHeight);
+  navEl.classList.toggle("scrolled", scrollY > 40);
   meterMilk.style.height = (prog * 100) + "%";
   updateDia();
 
