@@ -1,0 +1,1019 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Puleva Health · Salud que se bebe</title>
+<meta name="description" content="Concepto académico para el Hackathon UGR × Lactalis Puleva 2026 (Grupo 6). No es una web oficial.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#003086">
+<meta property="og:title" content="Puleva Health · Salud que se bebe">
+<meta property="og:description" content="Concepto académico · Hackathon UGR × Lactalis Puleva 2026 · Grupo 6">
+<meta property="og:image" content="https://ismael-sallami.github.io/puleva-health/media/poster.jpg">
+<meta property="og:url" content="https://ismael-sallami.github.io/puleva-health/">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23003086'/%3E%3Cpath d='M32 10C32 10 16 30 16 40a16 16 0 0 0 32 0C48 30 32 10 32 10z' fill='%23fbfaf7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --royal: #003086;
+    --royal-2: #2a5db0;
+    --ink: #001a4d;
+    --green: #007c45;
+    --mint: #00965a;
+    --red: #e63946;
+    --sky: #1e6fd9;
+    --milk: #fbfaf7;
+    --cream: #f3efe7;
+    --text: #0d1b33;
+    --muted: #5f6b80;
+    --care: #f2a3a8;
+    --now: #2f5ec9;
+    --shield: #f08a24;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    color: var(--milk);
+    background: radial-gradient(120% 90% at 70% 10%, var(--royal-2) 0%, var(--royal) 45%, var(--ink) 100%) fixed;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--milk); color: var(--royal); }
+
+  /* --- Lienzo 3D fijo detrás de todo --- */
+  #gl { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; display: block; }
+  .grain {
+    position: fixed; inset: -50%; z-index: 1; pointer-events: none; opacity: .07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain 1.2s steps(6) infinite;
+  }
+  @keyframes grain { 0%{transform:translate(0,0)} 20%{transform:translate(-3%,2%)} 40%{transform:translate(2%,-3%)} 60%{transform:translate(-2%,-1%)} 80%{transform:translate(3%,3%)} 100%{transform:translate(0,0)} }
+
+  main { position: relative; z-index: 2; }
+  section { min-height: 100vh; padding: 14vh 6vw; display: flex; flex-direction: column; justify-content: center; position: relative; }
+  .half { max-width: min(560px, 46vw); }
+
+  /* --- Cargador: un bote que se llena de leche --- */
+  #loader {
+    position: fixed; inset: 0; z-index: 50; display: grid; place-items: center;
+    background: var(--royal); transition: opacity .8s ease, visibility .8s;
+  }
+  #loader.done { opacity: 0; visibility: hidden; }
+  .loader-bottle { width: 70px; height: 150px; border: 3px solid var(--milk); border-radius: 18px 18px 22px 22px; position: relative; overflow: hidden; }
+  .loader-bottle::before { content: ""; position: absolute; top: -14px; left: 18px; width: 28px; height: 14px; background: var(--milk); border-radius: 4px; }
+  .loader-milk { position: absolute; left: 0; right: 0; bottom: 0; height: 0%; background: var(--milk); transition: height .3s; }
+  .loader-milk::before { content: ""; position: absolute; top: -10px; left: -50%; width: 200%; height: 20px; background: radial-gradient(circle at 25% 100%, transparent 9px, var(--milk) 10px) 0 0/40px 20px repeat-x; animation: slosh 1s linear infinite; }
+  @keyframes slosh { to { transform: translateX(40px); } }
+  .loader-text { margin-top: 22px; font-weight: 800; letter-spacing: .2em; font-size: 12px; text-align: center; }
+
+  /* --- Navegación --- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 6vw; mix-blend-mode: normal;
+  }
+  .logo { font-weight: 900; font-style: italic; font-size: 22px; letter-spacing: -.02em; color: var(--milk); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+  .logo span { font-style: italic; font-size: 11px; background: var(--green); padding: 3px 8px; border-radius: 999px; letter-spacing: .08em; }
+  .nav-links { display: flex; gap: 26px; }
+  .nav-links a { color: var(--milk); text-decoration: none; font-size: 13px; font-weight: 600; opacity: .8; position: relative; }
+  .nav-links a::after { content: ""; position: absolute; left: 0; bottom: -4px; width: 0; height: 2px; background: var(--milk); transition: width .35s; }
+  .nav-links a:hover { opacity: 1; } .nav-links a:hover::after { width: 100%; }
+  .progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--milk), var(--mint)); z-index: 21; width: 0; }
+
+  /* --- Tipografía --- */
+  .kicker { font-size: 12px; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; opacity: .75; margin-bottom: 18px; }
+  .kicker b { color: var(--milk); background: rgba(255,255,255,.12); padding: 4px 10px; border-radius: 999px; }
+  h1.hero-title { font-weight: 900; font-size: clamp(52px, 8.4vw, 132px); line-height: .86; letter-spacing: -.05em; }
+  h1.hero-title .serif { font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400; letter-spacing: -.02em; display: block; color: #cfe9ff; }
+  .char { display: inline-block; transform: translateY(110%) rotate(8deg); opacity: 0; transition: transform 1s cubic-bezier(.2,.9,.2,1), opacity 1s; }
+  .loaded .char { transform: none; opacity: 1; }
+  h2 { font-weight: 900; font-size: clamp(38px, 5.4vw, 84px); line-height: .95; letter-spacing: -.04em; margin-bottom: 22px; }
+  h2 em { font-family: "Instrument Serif", serif; font-weight: 400; letter-spacing: -.01em; }
+  p.lead { font-size: clamp(16px, 1.35vw, 20px); line-height: 1.55; opacity: .92; max-width: 52ch; text-shadow: 0 2px 18px rgba(0,26,77,.55); }
+  .src { font-size: 11px; opacity: .55; margin-top: 10px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; margin-top: 34px; padding: 16px 26px; border-radius: 999px;
+    background: var(--milk); color: var(--royal); font-weight: 800; text-decoration: none; font-size: 15px; border: 0; cursor: pointer;
+    box-shadow: 0 12px 40px rgba(0,0,0,.25); transition: transform .3s cubic-bezier(.2,.9,.2,1), box-shadow .3s;
+  }
+  .btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 18px 50px rgba(0,0,0,.35); }
+  .btn.red { background: var(--red); color: white; }
+
+  /* --- Revelado al hacer scroll --- */
+  .reveal { opacity: 0; transform: translateY(60px); transition: opacity 1s ease, transform 1s cubic-bezier(.2,.9,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+  .reveal.d1 { transition-delay: .12s } .reveal.d2 { transition-delay: .24s } .reveal.d3 { transition-delay: .36s }
+
+  /* --- Cinta infinita --- */
+  .marquee { position: relative; z-index: 2; transform: rotate(-3deg); background: var(--milk); color: var(--royal); padding: 18px 0; overflow: hidden; white-space: nowrap; margin: -4vh 0; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
+  .marquee.alt { transform: rotate(2deg); background: var(--green); color: var(--milk); }
+  .marquee-track { display: inline-flex; gap: 40px; animation: marquee 22s linear infinite; font-weight: 900; font-size: clamp(22px, 3vw, 42px); letter-spacing: -.02em; }
+  .marquee.alt .marquee-track { animation-direction: reverse; }
+  .marquee-track span.s { font-family: "Instrument Serif", serif; font-style: italic; font-weight: 400; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+
+  /* --- Spot en pantalla 3D --- */
+  #spot { align-items: center; text-align: center; }
+  .spot-head { max-width: 900px; margin-bottom: 40px; }
+  .screen-wrap { perspective: 1600px; width: min(1100px, 88vw); }
+  .screen {
+    position: relative; border-radius: 28px; overflow: hidden; aspect-ratio: 16/9; background: #000;
+    box-shadow: 0 50px 120px rgba(0,10,40,.6), 0 0 0 10px rgba(255,255,255,.08), 0 0 0 11px rgba(255,255,255,.25);
+    transform-style: preserve-3d; transition: transform .25s ease-out; will-change: transform;
+  }
+  .screen video { width: 100%; height: 100%; display: block; object-fit: cover; }
+  .screen::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,.18) 0%, transparent 35%); }
+  .drop-play {
+    position: absolute; left: 50%; top: 50%; width: 120px; height: 120px; margin: -60px 0 0 -60px; border: 0; cursor: pointer;
+    background: var(--milk); border-radius: 50% 50% 50% 0; transform: rotate(-45deg) scale(1); transition: transform .4s cubic-bezier(.2,.9,.2,1), opacity .4s;
+    box-shadow: 0 20px 50px rgba(0,0,0,.4); display: grid; place-items: center; z-index: 3;
+  }
+  .drop-play:hover { transform: rotate(-45deg) scale(1.1); }
+  .drop-play::before { content: ""; transform: rotate(45deg) translateX(5px); border-left: 34px solid var(--royal); border-top: 21px solid transparent; border-bottom: 21px solid transparent; }
+  .screen.playing .drop-play { opacity: 0; pointer-events: none; transform: rotate(-45deg) scale(.6); }
+  .spot-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 64px; display: flex; align-items: center; gap: 14px; padding: 0 20px; background: linear-gradient(transparent, rgba(0,20,60,.8)); z-index: 2; opacity: 0; transition: opacity .3s; }
+  .screen:hover .spot-bar, .screen.paused .spot-bar { opacity: 1; }
+  .spot-bar button { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); color: white; border-radius: 999px; padding: 8px 14px; font: 700 12px Inter, sans-serif; cursor: pointer; }
+  .spot-track { flex: 1; height: 8px; border-radius: 6px; background: rgba(255,255,255,.2); overflow: hidden; cursor: pointer; }
+  .spot-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(--milk), #cfe9ff); border-radius: 6px; }
+  .spot-note { margin-top: 22px; font-size: 12px; opacity: .6; }
+
+
+  /* --- Un día con Puleva Health (scroll horizontal) --- */
+  #dia { padding: 0; min-height: 0; height: 520vh; display: block; }
+  .dia-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+  .dia-sky { position: absolute; inset: 0; background: linear-gradient(180deg, var(--sky-a, #ff9e5e) 0%, var(--sky-b, #2a5db0) 100%); }
+  .dia-sun { position: absolute; width: 140px; height: 140px; margin: -70px 0 0 -70px; border-radius: 50%; background: radial-gradient(circle, #fff7d6 0%, #ffd166 45%, rgba(255,209,102,0) 72%); filter: blur(.5px); }
+  .dia-sun.moon { background: radial-gradient(circle at 40% 40%, #ffffff 0%, #dfe8f6 45%, rgba(223,232,246,0) 72%); }
+  .dia-head { position: absolute; top: 12vh; left: 6vw; z-index: 3; }
+  .dia-head h2 { margin-bottom: 8px; }
+  .dia-clock { position: absolute; bottom: 6vh; left: 6vw; z-index: 3; font-weight: 900; font-size: clamp(54px, 8vw, 120px); letter-spacing: -.05em; font-variant-numeric: tabular-nums; opacity: .95; }
+  .dia-track { position: absolute; left: 0; top: 0; height: 100%; display: flex; will-change: transform; z-index: 2; }
+  .moment { width: 100vw; height: 100%; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 22vh 8vw 10vh; gap: 4vw; }
+  .moment .m-time { font-size: 14px; font-weight: 800; letter-spacing: .22em; opacity: .85; }
+  .moment h3 { font-size: clamp(40px, 5vw, 76px); font-weight: 900; letter-spacing: -.04em; line-height: .95; margin: 12px 0 14px; }
+  .moment h3 em { font-family: "Instrument Serif", serif; font-weight: 400; }
+  .moment p { font-size: 17px; line-height: 1.55; max-width: 44ch; opacity: .92; }
+  .moment .m-tag { display: inline-block; margin-top: 18px; padding: 7px 14px; border-radius: 999px; font-size: 12px; font-weight: 800; letter-spacing: .14em; }
+  .m-tag.daily { background: var(--mint); } .m-tag.active { background: var(--sky); }
+  .moment .m-prod { justify-self: center; height: min(62vh, 560px); filter: drop-shadow(0 40px 50px rgba(0,10,40,.45)); transition: transform .3s ease-out; }
+  .dia-dots { position: absolute; bottom: 9vh; left: 50%; transform: translateX(-50%); display: flex; gap: 10px; z-index: 3; }
+  .dia-dots i { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.35); transition: all .3s; }
+  .dia-dots i.on { background: white; width: 28px; border-radius: 6px; }
+
+  /* --- Por qué funciona: tarjetas que giran --- */
+  .flips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 40px; }
+  .flip { perspective: 1200px; height: 320px; cursor: pointer; }
+  .flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .8s cubic-bezier(.2,.9,.2,1); }
+  .flip:hover .flip-inner, .flip.on .flip-inner { transform: rotateY(180deg); }
+  .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 26px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; }
+  .face.front { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); backdrop-filter: blur(12px); }
+  .face.back { background: var(--milk); color: var(--text); transform: rotateY(180deg); font-size: 15px; line-height: 1.55; }
+  .face .ax { font-size: 12px; font-weight: 800; letter-spacing: .2em; opacity: .7; }
+  .face.front .q { font-size: 28px; font-weight: 900; letter-spacing: -.03em; line-height: 1.05; }
+  .face.front .hint { font-size: 12px; opacity: .6; }
+  .face.back b { color: var(--royal); }
+  .face .big-ico { font-size: 54px; line-height: 1; }
+
+  /* --- Medidor de scroll: un bote que se llena --- */
+  .meter { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); z-index: 25; width: 26px; height: 96px; cursor: pointer; }
+  .meter-body { position: absolute; left: 0; right: 0; bottom: 0; top: 14px; border: 2.5px solid rgba(255,255,255,.85); border-radius: 9px 9px 11px 11px; overflow: hidden; }
+  .meter-cap { position: absolute; top: 0; left: 6px; width: 14px; height: 11px; border-radius: 3px; background: rgba(255,255,255,.85); }
+  .meter-milk { position: absolute; left: 0; right: 0; bottom: 0; height: 0; background: var(--milk); }
+  .meter-milk::before { content: ""; position: absolute; top: -4px; left: -30%; width: 160%; height: 8px; background: radial-gradient(circle at 25% 100%, transparent 3px, var(--milk) 4px) 0 0/12px 8px repeat-x; animation: slosh .8s linear infinite; }
+
+  /* --- Descarga del informe --- */
+  .nav-pdf { display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 999px; background: var(--milk); color: var(--royal) !important; opacity: 1 !important; font-weight: 800 !important; }
+  .nav-pdf::after { display: none; }
+  .nav-pdf:hover { transform: translateY(-2px); }
+  .btn-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .btn.solid { background: var(--royal); color: var(--milk); box-shadow: 0 12px 40px rgba(0,26,77,.35); }
+  #descarga { justify-content: flex-end; align-items: center; text-align: center; padding-bottom: 12vh; }
+  .pdf-wrap { margin-top: 0; }
+  #descarga .team { margin-top: 34px; color: var(--royal); }
+  .pdf-card { margin: 0 auto; background: var(--royal) !important; box-shadow: 0 24px 60px rgba(0,26,77,.35); display: inline-flex; align-items: center; gap: 18px; padding: 14px 14px 14px 22px; border-radius: 24px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25); backdrop-filter: blur(12px); text-align: left; }
+  .pdf-card .doc { width: 46px; height: 58px; border-radius: 6px 14px 6px 6px; background: var(--milk); position: relative; flex: none; }
+  .pdf-card .doc::after { content: "PDF"; position: absolute; left: 6px; bottom: 7px; font: 900 11px Inter, sans-serif; color: white; background: var(--red); padding: 2px 5px; border-radius: 4px; }
+  .pdf-card small { display: block; opacity: .7; font-size: 12px; margin-top: 2px; }
+  .pdf-card .btn { margin-top: 0; }
+
+  /* --- Problema --- */
+  .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 46px; }
+  .pain {
+    background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); border-radius: 26px; padding: 30px; backdrop-filter: blur(14px);
+    transition: transform .5s cubic-bezier(.2,.9,.2,1), background .4s;
+  }
+  .pain:hover { transform: translateY(-8px) rotate(-1deg); background: rgba(255,255,255,.12); }
+  .pain .big { font-size: 56px; font-weight: 900; letter-spacing: -.04em; line-height: 1; }
+  .pain h3 { font-size: 20px; margin: 14px 0 8px; }
+  .pain p { font-size: 14px; opacity: .8; line-height: 1.5; }
+  .pain svg { width: 46px; height: 46px; }
+  .strike { position: relative; display: inline-block; }
+  .strike::after { content: ""; position: absolute; left: -4%; top: 52%; height: 6px; width: 0; background: var(--red); border-radius: 4px; transform: rotate(-4deg); transition: width .8s .4s cubic-bezier(.2,.9,.2,1); }
+  .in .strike::after { width: 108%; }
+
+  /* --- Líneas de producto --- */
+  .line-tag { display: inline-flex; gap: 8px; align-items: center; font-size: 12px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; padding: 8px 14px; border-radius: 999px; margin-bottom: 20px; }
+  .line-tag.daily { background: var(--mint); } .line-tag.active { background: var(--sky); }
+  .cards { display: grid; gap: 14px; margin-top: 30px; }
+  .pcard {
+    display: grid; grid-template-columns: 8px 1fr auto; gap: 16px; align-items: center; padding: 18px 22px; border-radius: 20px;
+    background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(12px); cursor: pointer;
+    transition: transform .4s cubic-bezier(.2,.9,.2,1), background .3s;
+  }
+  .pcard:hover, .pcard.hot { transform: translateX(10px); background: rgba(255,255,255,.16); }
+  .pcard .bar { width: 8px; height: 100%; min-height: 46px; border-radius: 6px; }
+  .pcard h4 { font-size: 20px; font-weight: 900; letter-spacing: -.02em; }
+  .pcard p { font-size: 13px; opacity: .8; margin-top: 3px; line-height: 1.4; }
+  .pcard .price { font-weight: 900; font-size: 22px; text-align: right; }
+  .pcard .price small { display: block; font-size: 11px; font-weight: 600; opacity: .65; }
+  .claim { font-size: 11px; opacity: .6; margin-top: 6px; font-style: italic; }
+
+  .complement {
+    margin-top: 28px; display: flex; gap: 14px; align-items: center; padding: 18px 22px; border-radius: 20px;
+    background: linear-gradient(90deg, rgba(0,150,90,.35), rgba(30,111,217,.35)); border: 1px solid rgba(255,255,255,.2); font-size: 14px; line-height: 1.5;
+  }
+  .complement .plus { font-size: 34px; font-weight: 900; }
+
+  /* --- Demo creatina --- */
+  .steps { display: flex; gap: 12px; margin-top: 26px; flex-wrap: wrap; }
+  .step { padding: 12px 18px; border-radius: 999px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); font-weight: 800; font-size: 14px; transition: background .4s, transform .4s; }
+  .step.on { background: var(--milk); color: var(--royal); transform: scale(1.06); }
+  .science { margin-top: 26px; padding: 20px 22px; border-left: 4px solid var(--shield); background: rgba(0,0,0,.18); border-radius: 0 18px 18px 0; font-size: 14px; line-height: 1.6; }
+
+  /* --- Cifras --- */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 40px; }
+  .stat { padding: 28px 24px; border-radius: 26px; background: var(--milk); color: var(--text); position: relative; overflow: hidden; }
+  .stat::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 6px; background: var(--c, var(--royal)); }
+  .stat .num { font-size: clamp(38px, 4.2vw, 64px); font-weight: 900; letter-spacing: -.05em; color: var(--c, var(--royal)); line-height: 1; }
+  .stat .lbl { font-size: 13px; color: var(--muted); margin-top: 10px; line-height: 1.4; }
+
+  /* --- Dónde --- */
+  .where { display: grid; grid-template-columns: 1.2fr 1fr; gap: 24px; margin-top: 36px; align-items: stretch; }
+  .yes, .no { border-radius: 26px; padding: 28px; }
+  .yes { background: var(--milk); color: var(--text); }
+  .yes h3, .no h3 { font-size: 22px; font-weight: 900; margin-bottom: 14px; letter-spacing: -.02em; }
+  .yes ol { list-style: none; counter-reset: s; display: grid; gap: 12px; }
+  .yes li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 10px; font-size: 14px; line-height: 1.45; }
+  .yes li::before { content: counter(s); width: 28px; height: 28px; border-radius: 50%; background: var(--royal); color: white; display: grid; place-items: center; font-weight: 900; font-size: 13px; }
+  .no { background: rgba(230,57,70,.14); border: 2px solid var(--red); }
+  .no h3 { color: #ff8f97; }
+  .no .x { display: flex; gap: 12px; margin-bottom: 14px; font-size: 14px; line-height: 1.45; }
+  .no .x b { color: #ff8f97; }
+  .no .x::before { content: "✕"; color: var(--red); font-weight: 900; font-size: 20px; line-height: 1; }
+
+  /* --- Final --- */
+  #finale { text-align: center; align-items: center; justify-content: flex-start; padding-top: 12vh; min-height: 100vh; }
+  #finale h2 { font-size: clamp(60px, 9vw, 150px); }
+  .team { margin-top: 70vh; display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; font-size: 14px; }
+  .team div { text-align: left; }
+  .team b { display: block; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; opacity: .6; margin-bottom: 6px; }
+
+  footer { position: relative; z-index: 2; padding: 34px 6vw 40px; background: var(--ink); font-size: 12px; line-height: 1.6; color: rgba(255,255,255,.7); }
+  footer strong { color: var(--milk); }
+  .disclaimer-pill { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); z-index: 30; background: rgba(0,26,77,.85); border: 1px solid rgba(255,255,255,.2); padding: 8px 16px; border-radius: 999px; font-size: 11px; backdrop-filter: blur(10px); white-space: nowrap; }
+
+  /* --- Cursor de gota --- */
+  .cursor { position: fixed; top: 0; left: 0; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--milk); z-index: 60; pointer-events: none; mix-blend-mode: difference; transition: width .25s, height .25s, margin .25s; }
+  .cursor.big { width: 56px; height: 56px; margin: -28px 0 0 -28px; }
+  @media (hover: none) { .cursor { display: none; } }
+
+  @media (max-width: 900px) {
+    .moment { grid-template-columns: 1fr; padding: 24vh 8vw 12vh; gap: 2vh; text-align: left; }
+    .moment .m-prod { height: 34vh; order: -1; justify-self: start; }
+    .dia-clock { bottom: 4vh; font-size: 40px; } .dia-head { top: 6vh; } .dia-head h2 { font-size: 30px; }
+        .face.front .q { font-size: 21px; } .face.back { font-size: 13px; padding: 18px; }
+    .meter { right: 10px; transform: translateY(-50%) scale(.8); }
+    .dia-clock { bottom: auto; top: 6vh; left: auto; right: 6vw; font-size: 30px; }
+    .dia-head { top: 6vh; max-width: 60vw; } .dia-head .kicker { display: none; }
+    .flips { grid-template-columns: 1fr; } .flip { height: 230px; }
+    .disclaimer-pill { display: none; }
+    .hero-note { display: block !important; color: var(--royal); opacity: .8 !important; font-weight: 600; text-shadow: none; position: relative; z-index: 3; }
+    .half { max-width: 100%; }
+    .pain-grid, .stats, .where { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    section { padding: 12vh 6vw; }
+    .team { margin-top: 50vh; }
+    .disclaimer-pill { white-space: normal; width: 90vw; text-align: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track, .grain { animation: none; }
+    .reveal, .char { transition: none; opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div>
+    <div class="loader-bottle"><div class="loader-milk" id="loaderMilk"></div></div>
+    <div class="loader-text">LLENANDO<br>SALUD…</div>
+  </div>
+</div>
+
+<canvas id="gl"></canvas>
+<div class="grain"></div>
+<div class="cursor" id="cursor"></div>
+<div class="progress" id="progress" style="display:none"></div>
+<div class="meter" id="meter" title="Volver arriba"><div class="meter-cap"></div><div class="meter-body"><div class="meter-milk" id="meterMilk"></div></div></div>
+
+<nav>
+  <a class="logo" href="#hero">PULEVA <span>HEALTH</span></a>
+  <div class="nav-links">
+    <a href="#spot">Spot</a>
+    <a href="#daily">Daily</a>
+    <a href="#active">Active</a>
+    <a href="#crea">El tapón</a>
+    <a href="#dia">Un día</a>
+    <a href="#numbers">Cifras</a>
+    <a href="#where">Dónde</a>
+    <a class="nav-pdf" href="media/PulevaHealth_Grupo6.pdf" download>Informe PDF ↓</a>
+  </div>
+</nav>
+
+<main>
+  <!-- 0 · HERO -->
+  <section id="hero" data-state="0">
+    <div class="half">
+      <div class="kicker"><b>Hackathon Lactalis Puleva 2026</b> &nbsp;Grupo 6</div>
+      <h1 class="hero-title" id="heroTitle"><span data-split>Salud que</span><span class="serif" data-split>se bebe.</span></h1>
+      <p class="lead reveal d2" style="margin-top:28px">Complementos naturales para cuidarte y prevenir cada día. <b>Cinco monodosis líquidas</b>, al estilo de un Actimel, con la ciencia láctea de Puleva.</p>
+      <div class="btn-row reveal d3"><a class="btn" href="#problem">Descubre la gama <span>↓</span></a><a class="btn solid" href="media/PulevaHealth_Grupo6.pdf" download>Descargar informe (PDF) ↓</a></div>
+      <div class="hero-note src" style="display:none;margin-top:18px">Concepto académico · Hackathon UGR × Lactalis Puleva 2026 · No es una web oficial</div>
+    </div>
+  </section>
+
+  <div class="marquee"><div class="marquee-track" id="mq1"></div></div>
+
+  <!-- 1 · SPOT -->
+  <section id="spot" data-state="1">
+    <div class="spot-head reveal">
+      <div class="kicker">El spot · 67 segundos</div>
+      <h2>Míralo <em>en movimiento.</em></h2>
+    </div>
+    <div class="screen-wrap reveal d1">
+      <div class="screen paused" id="screen">
+        <video id="spotVideo" src="media/puleva_health.mp4" poster="media/poster.jpg" playsinline muted preload="metadata"></video>
+        <button class="drop-play" id="dropPlay" aria-label="Reproducir el spot"></button>
+        <div class="spot-bar">
+          <button id="spotToggle">Pausa</button>
+          <div class="spot-track" id="spotTrack"><div class="spot-fill" id="spotFill"></div></div>
+          <button id="spotSound">🔇 Activar sonido</button>
+          <button id="spotFull">⛶</button>
+        </div>
+      </div>
+    </div>
+    <div class="spot-note">Vídeo hecho con Remotion (React) · voz neuronal sintética · música original generada por código · subtítulos sincronizados palabra a palabra</div>
+  </section>
+
+  <!-- 1 · PROBLEMA -->
+  <section id="problem" data-state="2">
+    <div class="reveal">
+      <div class="kicker">El insight</div>
+      <h2>El lineal habla en <span class="strike">pastillas</span><br>y en <span class="strike">polvo</span>. <em>Nosotros, no.</em></h2>
+      <p class="lead">Hoy cuidarse pasa por tragar una cápsula que parece medicina o por preparar un batido de gimnasio. Nadie lo ha puesto fácil en la nevera de casa.</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain reveal d1">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3"><rect x="6" y="17" width="36" height="14" rx="7" transform="rotate(-35 24 24)"/><path d="M19 13l10 14" transform="rotate(-35 24 24)"/></svg>
+        <div class="big" data-count="37.4" data-dec="1" data-suffix=" %">0</div>
+        <h3>La pastilla parece medicina</h3>
+        <p>De los adultos tiene dificultad para tragar comprimidos o cápsulas.</p>
+        <div class="src">Schiele et al., 2013</div>
+      </div>
+      <div class="pain reveal d2">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3"><path d="M14 10h20v6l4 6v18a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V22l4-6z"/><path d="M10 26h28"/></svg>
+        <div class="big">1 kg</div>
+        <h3>El polvo es de gimnasio</h3>
+        <p>Bote, báscula y coctelera. Y la creatina no puede venderse disuelta: se degrada.</p>
+      </div>
+      <div class="pain reveal d3">
+        <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="3"><circle cx="24" cy="24" r="17"/><path d="M24 14v11l7 5"/></svg>
+        <div class="big" data-count="72" data-suffix=" %">0</div>
+        <h3>Déficits del día a día</h3>
+        <p>No alcanza el magnesio recomendado. En zinc es el 83 % y en vitamina E, el 80 %.</p>
+        <div class="src">Estudio ANIBES (Olza et al., 2017)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · DAILY -->
+  <section id="daily" data-state="3">
+    <div class="half reveal">
+      <div class="line-tag daily">● Puleva Health Daily</div>
+      <h2>Salud y prevención, <em>en un shot.</em></h2>
+      <p class="lead">Tres shots lácteos refrigerados, en pack de 6, para cuidarte cada mañana. Pasa el ratón por cada uno.</p>
+      <div class="cards">
+        <div class="pcard" data-bottle="0"><div class="bar" style="background:var(--care)"></div><div><h4>Care</h4><p>Piel · vitaminas E y C y zinc · sabor fresa</p><div class="claim">El zinc contribuye al mantenimiento de la piel en condiciones normales.</div></div><div class="price">6,49 €<small>1,08 €/shot</small></div></div>
+        <div class="pcard" data-bottle="1"><div class="bar" style="background:var(--now)"></div><div><h4>Now</h4><p>Concentración · Mg, teanina, B6 y B12 · frutos rojos</p><div class="claim">B6 y B12 ayudan a disminuir el cansancio y la fatiga.</div></div><div class="price">6,49 €<small>en vez del 2.º café</small></div></div>
+        <div class="pcard" data-bottle="2"><div class="bar" style="background:var(--shield)"></div><div><h4>Shield</h4><p>Defensas · lactoferrina, zinc, saúco y vitaminas C y D</p><div class="claim">El zinc y las vitaminas C y D contribuyen al funcionamiento normal del sistema inmunitario.</div></div><div class="price">7,49 €<small>1,25 €/shot</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · ACTIVE -->
+  <section id="active" data-state="4">
+    <div class="half reveal">
+      <div class="line-tag active">● Puleva Health Active</div>
+      <h2>Rendimiento, <em>sin bote ni báscula.</em></h2>
+      <p class="lead">La creatina y la proteína son el mercado más grande de la suplementación. Active las ofrece en el formato más cómodo de tomar.</p>
+      <div class="cards">
+        <div class="pcard" data-bottle="3"><div class="bar" style="background:#f26b2a"></div><div><h4>Crea-Snap</h4><p>3 g de creatina en el tapón · se pulsa, se agita y se bebe</p><div class="claim">La creatina aumenta el rendimiento físico en series breves de alta intensidad.</div></div><div class="price">1,79 €<small>pack 4: 5,99 €</small></div></div>
+        <div class="pcard" data-bottle="4"><div class="bar" style="background:#9fb3d9"></div><div><h4>ClearPro</h4><p>20 g de proteína clear · 125 ml · textura de zumo</p><div class="claim">Las proteínas contribuyen a aumentar y conservar la masa muscular.</div></div><div class="price">2,19 €<small>por unidad</small></div></div>
+      </div>
+      <div class="complement"><div class="plus">+</div><div><b>Dos líneas complementarias.</b> Daily cuida tu día y Active acompaña tu entreno. Misma marca, mismo formato, públicos distintos.</div></div>
+    </div>
+  </section>
+
+  <div class="marquee alt"><div class="marquee-track" id="mq2"></div></div>
+
+  <!-- 4 · CREA-SNAP -->
+  <section id="crea" data-state="5">
+    <div class="half reveal">
+      <div class="kicker">Innovación · Crea-Snap</div>
+      <h2>La creatina vive <em>en el tapón.</em></h2>
+      <p class="lead">Disuelta en agua, la creatina se transforma con el tiempo en <b>creatinina</b>, una sustancia sin efecto sobre el rendimiento. Por eso los 3 g van en polvo dentro del tapón, <b>sin tocar el líquido</b>, hasta el momento de beber.</p>
+      <div class="steps"><div class="step" id="st1">1 · Pulsa</div><div class="step" id="st2">2 · Agita</div><div class="step" id="st3">3 · Entrena</div></div>
+      <button class="btn" id="snapBtn">Pulsa el tapón ↯</button>
+      <div class="science">Cada shot conserva sus <b>3 g de creatina activa</b> durante toda su vida útil. Un formato que un bote de polvo enviado por paquetería no puede igualar.</div>
+    </div>
+  </section>
+
+
+  <!-- Un día con Puleva Health -->
+  <section id="dia">
+    <div class="dia-sticky">
+      <div class="dia-sky" id="diaSky"></div>
+      <div class="dia-sun" id="diaSun"></div>
+      <div class="dia-head"><div class="kicker">Dos líneas que se complementan</div><h2>Un día con <em>Puleva Health.</em></h2></div>
+      <div class="dia-clock" id="diaClock">08:00</div>
+      <div class="dia-track" id="diaTrack">
+        <div class="moment"><div><div class="m-time">08:00 · DESAYUNO</div><h3>Defensas <em>para toda la familia.</em></h3><p>Un shot de <b>Shield</b> con lactoferrina de la leche, zinc y vitaminas C y D antes de salir de casa. Prevención natural en otoño e invierno.</p><span class="m-tag daily">DAILY · SHIELD</span></div><img class="m-prod" data-img="shield" alt="Puleva Health Daily Shield"></div>
+        <div class="moment"><div><div class="m-time">11:00 · OFICINA</div><h3>El shot que sustituye <em>al segundo café.</em></h3><p><b>Now</b> combina magnesio, L-teanina, B6 y B12. Las vitaminas B6 y B12 ayudan a disminuir el cansancio y la fatiga.</p><span class="m-tag daily">DAILY · NOW</span></div><img class="m-prod" data-img="now" alt="Puleva Health Daily Now"></div>
+        <div class="moment"><div><div class="m-time">14:30 · DESPUÉS DE COMER</div><h3>Tu piel, <em>desde dentro.</em></h3><p><b>Care</b>, sabor fresa, con vitaminas E y C y zinc. Belleza desde dentro, sin cápsulas de colágeno.</p><span class="m-tag daily">DAILY · CARE</span></div><img class="m-prod" data-img="care" alt="Puleva Health Daily Care"></div>
+        <div class="moment"><div><div class="m-time">18:30 · GIMNASIO</div><h3>Pulsa, agita, <em>entrena.</em></h3><p><b>Crea-Snap</b> guarda 3 g de creatina en el tapón, sin tocar el líquido, hasta el momento de beber.</p><span class="m-tag active">ACTIVE · CREA-SNAP</span></div><img class="m-prod" data-img="crea" alt="Puleva Health Active Crea-Snap"></div>
+        <div class="moment"><div><div class="m-time">20:00 · DESPUÉS DE ENTRENAR</div><h3>Proteína que se bebe <em>como un zumo.</em></h3><p><b>ClearPro</b>: 20 g de proteína clear en 125 ml, ligera y refrescante. Las proteínas contribuyen a conservar la masa muscular.</p><span class="m-tag active">ACTIVE · CLEARPRO</span></div><img class="m-prod" data-img="clear" alt="Puleva Health Active ClearPro"></div>
+      </div>
+      <div class="dia-dots" id="diaDots"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <!-- 5 · CIFRAS -->
+  <section id="numbers" data-state="6">
+    <div class="reveal">
+      <div class="kicker">El negocio</div>
+      <h2>Una oportunidad <em>que ya crece sola.</em></h2>
+    </div>
+    <div class="stats">
+      <div class="stat reveal d1" style="--c:var(--royal)"><div class="num" data-count="119.5" data-dec="1" data-suffix=" M€">0</div><div class="lbl">Mercado de complementos en súper e híper (NielsenIQ 2026)</div></div>
+      <div class="stat reveal d2" style="--c:var(--mint)"><div class="num" data-count="13.2" data-dec="1" data-prefix="+" data-suffix=" %">0</div><div class="lbl">Crecimiento interanual de la categoría</div></div>
+      <div class="stat reveal d3" style="--c:var(--red)"><div class="num" data-count="1" data-suffix=" M€">0</div><div class="lbl">Al año en TV y redes, con Roberto Leal y SofiG como embajadores (pendiente de acuerdo)</div></div>
+      <div class="stat reveal d3" style="--c:var(--sky)"><div class="num" data-count="29" data-prefix="Mes ">0</div><div class="lbl">Equilibrio operativo mensual y EBITDA positivo en el año 3</div></div>
+    </div>
+  </section>
+
+
+  <!-- Por qué funciona -->
+  <section id="razones">
+    <div class="reveal">
+      <div class="kicker">Autoevaluación</div>
+      <h2>Por qué <em>funciona.</em></h2>
+      <p class="lead">Las cuatro preguntas del reto. Pasa el ratón o toca cada tarjeta.</p>
+    </div>
+    <div class="flips">
+      <div class="flip reveal d1"><div class="flip-inner"><div class="face front"><div class="ax">MARKETING</div><div class="big-ico">🥛</div><div class="q">¿Por qué lo compraría el consumidor?</div><div class="hint">Gira ↻</div></div><div class="face back"><div class="ax">MARKETING</div><div>Sin pastillas ni polvos: <b>un shot de diez segundos</b> de una marca que ya está en su nevera. Cubre déficits reales: el 72 % no llega al magnesio recomendado, el 83 % al zinc y el 80 % a la vitamina E.</div></div></div></div>
+      <div class="flip reveal d2"><div class="flip-inner"><div class="face front"><div class="ax">COMERCIAL</div><div class="big-ico">🛒</div><div class="q">¿Por qué lo aceptaría la cadena?</div><div class="hint">Gira ↻</div></div><div class="face back"><div class="ax">COMERCIAL</div><div><b>Rotación e impulso:</b> packs semanales en la nevera y unidades en caja. Le deja un 30 % de margen y 1 M€ en TV y redes que le lleva compradores. Además recupera la venta deportiva que hoy se va a internet.</div></div></div></div>
+      <div class="flip reveal d3"><div class="flip-inner"><div class="face front"><div class="ax">I+D</div><div class="big-ico">🔬</div><div class="q">¿Por qué es creíble?</div><div class="hint">Gira ↻</div></div><div class="face back"><div class="ax">I+D</div><div>Es <b>el terreno de Puleva</b>: líquidos lácteos en frío, el Instituto Puleva de Nutrición e ingredientes del grupo. Solo usa claims autorizados por la EFSA, y la lactoferrina tiene respaldo en ensayos clínicos.</div></div></div></div>
+      <div class="flip reveal d3"><div class="flip-inner"><div class="face front"><div class="ax">RRHH</div><div class="big-ico">🤝</div><div class="q">¿Qué personas hacen falta?</div><div class="hint">Gira ↻</div></div><div class="face back"><div class="ax">RRHH</div><div>Una <b>unidad con cuenta de resultados propia</b> y cuatro perfiles clave: consumer health, regulatorio, KAM de gran distribución y brand manager. Más talento de la UGR y de la plantilla de I+D.</div></div></div></div>
+    </div>
+  </section>
+
+  <!-- 6 · DÓNDE -->
+  <section id="where" data-state="7">
+    <div class="reveal">
+      <div class="kicker">Go to market</div>
+      <h2>En la nevera <em>de tu súper.</em></h2>
+    </div>
+    <div class="where">
+      <div class="yes reveal d1">
+        <h3>Triple punto de contacto</h3>
+        <ol>
+          <li><span><b>Nevera de lácteos:</b> Daily junto a la leche Puleva, donde ya se busca un beneficio diario.</span></li>
+          <li><span><b>Pasillo de suplementos:</b> Active y un módulo Puleva Health ordenado por beneficio, no por ingrediente.</span></li>
+          <li><span><b>Impulso:</b> neveras de caja y vending en gimnasios para Crea-Snap y ClearPro.</span></li>
+        </ol>
+      </div>
+      <div class="no reveal d2">
+        <h3>Descartados</h3>
+        <div class="x"><span><b>Farmacia.</b> No es un medicamento ni quiere parecerlo.</span></div>
+        <div class="x"><span><b>E-commerce y Amazon.</b> Son líquidos refrigerados de compra de rutina, y nuestro público los compra en el súper.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · FINAL -->
+  <section id="finale" data-state="8">
+    <div class="reveal">
+      <div class="kicker">Puleva Health</div>
+      <h2>Salud que <em>se bebe.</em></h2>
+    </div>
+  </section>
+
+  <!-- Descarga del informe y equipo -->
+  <section id="descarga">
+    <div class="pdf-wrap reveal"><div class="pdf-card"><div class="doc"></div><div><b>Informe completo · Grupo 6</b><small>Estrategia, portfolio, go to market y business case · 14 págs.</small></div><a class="btn" href="media/PulevaHealth_Grupo6.pdf" download>Descargar ↓</a></div></div>
+    <div class="team reveal">
+      <div><b>Equipo · Grupo 6</b>David Bacas Posadas<br>Ismael Sallami Moreno<br>Jesús Rodríguez González</div>
+      <div><b>Programa</b>Hackathon de Innovación<br>UGR × Lactalis Puleva · 4.ª ed.<br>Dirección Estratégica I</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>Concepto académico.</strong> Esta web es una propuesta del Grupo 6 para el Hackathon de Innovación UGR × Lactalis Puleva 2026. No es una web oficial de Lactalis Puleva, y los productos e imágenes son prototipos ficticios.<br>
+  <strong>Complemento alimenticio.</strong> No debe utilizarse como sustituto de una dieta equilibrada y un modo de vida sano. No superar la dosis diaria expresamente recomendada.<br>
+  La investigación ha sido realizada con modelos de investigación de IA, comprobando que es verídica. Fuentes: NielsenIQ 2026, IQVIA 2026, ANIBES (Olza et al., 2017), Schiele et al. (2013), Ali et al. (2021).
+</footer>
+<div class="disclaimer-pill">Concepto académico · Hackathon UGR × Lactalis Puleva 2026 · No es una web oficial</div>
+
+<script src="assets.js"></script>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }</script>
+<script type="module">
+import * as THREE from "three";
+
+/* ============================================================
+   Texto: split de letras, cintas, contadores y revelados
+   ============================================================ */
+document.querySelectorAll("[data-split]").forEach((el, j) => {
+  const words = el.textContent.split(" "); el.textContent = "";
+  let i = 0;
+  words.forEach((w, wi) => {
+    const ws = document.createElement("span");
+    ws.style.cssText = "display:inline-block;white-space:nowrap;overflow:hidden;padding-bottom:.08em;vertical-align:top";
+    [...w].forEach(c => {
+      const s = document.createElement("span");
+      s.className = "char"; s.textContent = c;
+      s.style.transitionDelay = (0.35 + j * 0.25 + (i++) * 0.035) + "s";
+      ws.appendChild(s);
+    });
+    el.appendChild(ws);
+    if (wi < words.length - 1) el.appendChild(document.createTextNode(" "));
+  });
+});
+const mqWords = ["SALUD QUE SE BEBE", "CARE", "NOW", "SHIELD", "CREA-SNAP", "CLEARPRO"];
+for (const id of ["mq1", "mq2"]) {
+  const t = document.getElementById(id);
+  const chunk = mqWords.map((w, i) => i % 2 ? `<span class="s">${w}</span><span>✦</span>` : `<span>${w}</span><span>✦</span>`).join("");
+  t.innerHTML = chunk + chunk + chunk + chunk;
+}
+const io = new IntersectionObserver(entries => {
+  for (const e of entries) {
+    if (!e.isIntersecting) continue;
+    e.target.classList.add("in");
+    e.target.querySelectorAll("[data-count]").forEach(countUp);
+    if (e.target.matches("[data-count]")) countUp(e.target);
+    io.unobserve(e.target);
+  }
+}, { threshold: 0.25 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+function countUp(el) {
+  if (el.dataset.done) return; el.dataset.done = 1;
+  const end = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0);
+  const pre = el.dataset.prefix || "", suf = el.dataset.suffix || "";
+  const t0 = performance.now(), dur = 1600;
+  const tick = now => {
+    const k = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - k, 4);
+    el.textContent = pre + (end * e).toFixed(dec).replace(".", ",") + suf;
+    if (k < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+/* Cursor de gota */
+const cursor = document.getElementById("cursor");
+let mx = innerWidth / 2, my = innerHeight / 2, cx = mx, cy = my;
+addEventListener("pointermove", e => { mx = e.clientX; my = e.clientY; });
+document.querySelectorAll("a, button, .pcard").forEach(el => {
+  el.addEventListener("pointerenter", () => cursor.classList.add("big"));
+  el.addEventListener("pointerleave", () => cursor.classList.remove("big"));
+});
+
+/* ============================================================
+   Escena 3D
+   ============================================================ */
+const canvas = document.getElementById("gl");
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, innerWidth / innerHeight, 0.1, 100);
+camera.position.set(0, 0.2, 12);
+const world = new THREE.Group(); scene.add(world);
+
+/* --- Ola de leche (shader con desplazamiento y luz falsa) --- */
+const waveMat = new THREE.ShaderMaterial({
+  uniforms: { uTime: { value: 0 }, uLift: { value: 0 } },
+  vertexShader: `
+    uniform float uTime; uniform float uLift;
+    varying vec3 vPos;
+    void main(){
+      vec3 p = position;
+      float h = sin(p.x*0.45 + uTime*0.8)*0.45
+              + sin(p.x*1.15 - uTime*1.25 + p.y*0.7)*0.18
+              + sin(p.y*1.4 + uTime*0.6)*0.12
+              + sin((p.x+p.y)*2.3 + uTime*1.7)*0.04;
+      p.z += h * (0.75 + uLift*0.5);
+      vec4 w = modelMatrix * vec4(p,1.0);
+      vPos = w.xyz;
+      gl_Position = projectionMatrix * viewMatrix * w;
+    }`,
+  fragmentShader: `
+    varying vec3 vPos;
+    void main(){
+      vec3 n = normalize(cross(dFdx(vPos), dFdy(vPos)));
+      vec3 l = normalize(vec3(-0.4, 0.9, 0.7));
+      float d = abs(dot(n,l));
+      vec3 base = vec3(0.985, 0.98, 0.965);
+      vec3 shade = vec3(0.70, 0.78, 0.93);
+      vec3 col = mix(shade, base, smoothstep(0.15, 0.95, d));
+      vec3 v = normalize(cameraPosition - vPos);
+      float spec = pow(max(dot(reflect(-l, n), v), 0.0), 60.0);
+      float rim = pow(1.0 - abs(dot(n, v)), 3.0);
+      col += spec*0.55 + rim*0.12;
+      gl_FragColor = vec4(col, 1.0);
+    }`,
+  side: THREE.DoubleSide,
+});
+const wave = new THREE.Mesh(new THREE.PlaneGeometry(46, 14, 260, 80), waveMat);
+wave.rotation.x = -Math.PI / 2.25;
+wave.position.set(0, -4.15, -2);
+scene.add(wave);
+
+/* --- Gotas de leche flotando --- */
+const dropCount = 260;
+const dropGeo = new THREE.BufferGeometry();
+const dropPos = new Float32Array(dropCount * 3), dropSpeed = new Float32Array(dropCount);
+for (let i = 0; i < dropCount; i++) {
+  dropPos[i*3] = (Math.random() - 0.5) * 26;
+  dropPos[i*3+1] = (Math.random() - 0.5) * 14;
+  dropPos[i*3+2] = -Math.random() * 12 + 2;
+  dropSpeed[i] = 0.15 + Math.random() * 0.45;
+}
+dropGeo.setAttribute("position", new THREE.BufferAttribute(dropPos, 3));
+const dropTex = (() => {
+  const c = document.createElement("canvas"); c.width = c.height = 64;
+  const g = c.getContext("2d"), gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gr.addColorStop(0, "rgba(255,255,255,1)"); gr.addColorStop(0.45, "rgba(255,255,255,.65)"); gr.addColorStop(1, "rgba(255,255,255,0)");
+  g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+  return new THREE.CanvasTexture(c);
+})();
+const drops = new THREE.Points(dropGeo, new THREE.PointsMaterial({ size: 0.09, map: dropTex, transparent: true, depthWrite: false, opacity: 0.7 }));
+scene.add(drops);
+
+/* --- Botes con volumen: capas apiladas + brillo que recorre la etiqueta --- */
+const IMG = window.PRODUCT_IMAGES;
+const PRODUCTS = [
+  { key: "care", h: 3.2 }, { key: "now", h: 3.2 }, { key: "shield", h: 3.2 },
+  { key: "crea", h: 2.75 }, { key: "clear", h: 2.6 },
+];
+const loader = new THREE.TextureLoader();
+const bottles = [];
+const shineMats = [];
+const shineVS = `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`;
+const shineFS = `
+  uniform sampler2D map; uniform float uTime; uniform float uOffset; uniform float uBoost; varying vec2 vUv;
+  void main(){
+    vec4 c = texture2D(map, vUv);
+    if (c.a < 0.5) discard;
+    float x = fract(uTime*0.12 + uOffset) * 2.2 - 0.6;
+    float band = smoothstep(0.10, 0.0, abs(vUv.x - x + (vUv.y - 0.5)*0.45));
+    float soft = smoothstep(0.35, 0.0, abs(vUv.x - 0.28)) * 0.10;
+    gl_FragColor = vec4(vec3(1.0), band*(0.42 + uBoost*0.3) + soft);
+  }`;
+
+let loaded = 0;
+const milkFill = document.getElementById("loaderMilk");
+function makeBottle(p, i, tex) {
+  const aspect = tex.image.width / tex.image.height;
+  const h = p.h, w = h * aspect;
+  const g = new THREE.Group();
+  const geo = new THREE.PlaneGeometry(w, h);
+  const layers = 16, depth = w * 0.42;
+  for (let k = layers; k >= 1; k--) {
+    const shade = 0.42 + 0.33 * (1 - k / layers);
+    const m = new THREE.MeshBasicMaterial({ map: tex, alphaTest: 0.5, color: new THREE.Color(shade, shade, shade) });
+    const layer = new THREE.Mesh(geo, m);
+    layer.position.z = -k * depth / layers;
+    g.add(layer);
+  }
+  const front = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({ map: tex, alphaTest: 0.5 }));
+  g.add(front);
+  const shine = new THREE.ShaderMaterial({
+    uniforms: { map: { value: tex }, uTime: { value: 0 }, uOffset: { value: i * 0.17 }, uBoost: { value: 0 } },
+    vertexShader: shineVS, fragmentShader: shineFS, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+  });
+  shineMats.push(shine);
+  const sh = new THREE.Mesh(geo, shine); sh.position.z = 0.002; g.add(sh);
+  // sombra suave bajo el bote
+  const shadow = new THREE.Mesh(new THREE.CircleGeometry(w * 0.55, 32), new THREE.MeshBasicMaterial({ color: 0x001a4d, transparent: true, opacity: 0.28, depthWrite: false }));
+  shadow.rotation.x = -Math.PI / 2; shadow.scale.y = 0.35; shadow.position.set(0, -h / 2 - 0.02, -depth / 2);
+  g.add(shadow);
+  g.userData = { h, w, depth, front, spin: 0, hot: 0, shake: 0, cur: { x: 0, y: 0, z: 0, ry: 0, s: 1, o: 1 } };
+  world.add(g);
+  bottles[i] = g;
+}
+PRODUCTS.forEach((p, i) => {
+  loader.load(IMG[p.key], tex => {
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    makeBottle(p, i, tex);
+    loaded++;
+    milkFill.style.height = (loaded / PRODUCTS.length * 100) + "%";
+    if (loaded === PRODUCTS.length) setTimeout(() => {
+      document.getElementById("loader").classList.add("done");
+      document.body.classList.add("loaded");
+      document.querySelectorAll("#hero .reveal").forEach(el => el.classList.add("in"));
+    }, 450);
+  });
+});
+
+/* --- Coreografía por secciones: [x, y, z, rotY, escala, opacidad] por bote ---
+   Se indexa por id de sección, así añadir o reordenar secciones no descuadra nada. */
+const OFF = [0, 0, -14, 0, 0.6, 0];
+const STATES_BY_ID = {
+  hero:    [[0.9, -0.45, 0.2, 0.25, 0.86, 1], [2.15, -0.25, -0.5, 0.12, 0.86, 1], [3.4, -0.45, 0.2, -0.05, 0.86, 1], [4.55, -0.65, -0.9, -0.2, 0.86, 1], [5.7, -0.75, -0.3, -0.35, 0.86, 1]],
+  spot:    [[-6.4, 1.2, -2.5, 0.5, 0.62, 1], [-6.9, -1.6, -3, 0.4, 0.62, 1], [6.4, 1.3, -2.5, -0.5, 0.62, 1], [6.9, -1.5, -3, -0.4, 0.62, 1], [0, -3.4, -4, 0, 0.6, 0.9]],
+  problem: [[-6, 2, -10, 0.6, 0.8, 0.25], [-2, 3, -12, -0.4, 0.8, 0.25], [2, 2.5, -11, 0.5, 0.8, 0.25], [6, 3.2, -12, -0.5, 0.8, 0.25], [9, 2, -10, 0.3, 0.8, 0.25]],
+  daily:   [[1.6, -0.15, 0.4, 0.18, 1.1, 1], [3.3, 0.05, -0.3, 0, 1.1, 1], [5.0, -0.15, 0.4, -0.18, 1.1, 1], [12, -0.4, -2, 0, 1, 0], [14, -0.4, -2, 0, 1, 0]],
+  active:  [[-13, 0, -2, 0, 1, 0], [-14, 0, -2, 0, 1, 0], [-15, 0, -2, 0, 1, 0], [2.8, -0.2, 0.3, 0.2, 1.3, 1], [5.4, -0.25, 0.1, -0.2, 1.3, 1]],
+  crea:    [OFF, OFF, OFF, [3.6, -0.15, 1.2, 0, 1.7, 1], [9, -1, -6, 0, 1, 0]],
+  dia:     [OFF, OFF, OFF, OFF, OFF],
+  numbers: [[-5, 1.8, -9, 0, 1, 0.35], [-1.8, 2.6, -9, 0, 1, 0.35], [1.8, 2.6, -9, 0, 1, 0.35], [5, 1.8, -9, 0, 1, 0.35], [0, -3.4, -9, 0, 1, 0.35]],
+  razones: [OFF, OFF, OFF, OFF, OFF],
+  where:   [[-4.6, -2.5, -3, 0, 0.75, 0.9], [-2.3, -2.5, -3, 0, 0.75, 0.9], [0, -2.5, -3, 0, 0.75, 0.9], [2.3, -2.6, -3, 0, 0.75, 0.9], [4.6, -2.65, -3, 0, 0.75, 0.9]],
+  descarga: [[-3.3, 1.75, -1, 0.2, 0.62, 1], [-1.65, 1.9, -1, 0.1, 0.62, 1], [0, 1.95, -1, 0, 0.62, 1], [1.65, 1.85, -1, -0.1, 0.62, 1], [3.3, 1.75, -1, -0.2, 0.62, 1]],
+  finale:  [[-3.9, -0.95, 0.5, 0.25, 1.05, 1], [-1.95, -0.85, 0.1, 0.12, 1.05, 1], [0, -0.95, 0.5, 0, 1.05, 1], [1.95, -1.1, 0.1, -0.12, 1.05, 1], [3.9, -1.15, 0.5, -0.25, 1.05, 1]],
+};
+const WAVE_BY_ID = { hero: -4.15, finale: -2.75, descarga: -2.75 };
+const sections = [...document.querySelectorAll("main > section")];
+const SEC_IDS = sections.map(s => s.id);
+const STATES = SEC_IDS.map(id => STATES_BY_ID[id] ?? STATES_BY_ID.problem);
+const WAVE_Y = SEC_IDS.map(id => WAVE_BY_ID[id] ?? -9);
+const IDX = id => SEC_IDS.indexOf(id);
+let stateF = 0;
+function computeState() {
+  const y = scrollY + innerHeight * 0.5;
+  // una sección muy alta (la del scroll horizontal) cuenta como su tramo visible, no su centro
+  const centers = sections.map(s => s.offsetHeight > innerHeight * 1.5
+    ? Math.min(Math.max(y, s.offsetTop + innerHeight * 0.5), s.offsetTop + s.offsetHeight - innerHeight * 0.5)
+    : s.offsetTop + s.offsetHeight * 0.5);
+  if (y <= centers[0]) return 0;
+  for (let i = 0; i < centers.length - 1; i++) {
+    if (y < centers[i + 1]) {
+      const t = (y - centers[i]) / Math.max(1, centers[i + 1] - centers[i]);
+      const e = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      return i + e;
+    }
+  }
+  return centers.length - 1;
+}
+const lerp = (a, b, t) => a + (b - a) * t;
+/* Coreografía móvil (vertical): fila sobre la ola en hero y final; el resto, fantasmas al fondo */
+const ROW = (y, s) => [-1.3, -0.65, 0, 0.66, 1.34].map((x, k) => [x, y - (k > 2 ? 0.08 : 0), 0, [0.2, 0.1, 0, -0.1, -0.2][k], s, 1]);
+const MOBILE_BY_ID = {
+  hero: ROW(-2.6, 0.44),
+  crea: [OFF, OFF, OFF, [0.9, 1.6, -3, 0, 0.9, 0.35], OFF],
+  finale: ROW(-1.4, 0.46),
+  descarga: ROW(2.1, 0.4),
+};
+const ghost = st => st.map(([x, y, z, ry, sc, o]) => [x * 0.35, y * 0.8, z - 3, ry, sc * 0.7, o * 0.16]);
+const MSTATES = SEC_IDS.map(id => MOBILE_BY_ID[id] ?? ghost(STATES_BY_ID[id] ?? STATES_BY_ID.problem));
+function target(i, sf, list = STATES) {
+  const a = Math.floor(sf), b = Math.min(a + 1, list.length - 1), t = sf - a;
+  const A = list[a][i], B = list[b][i];
+  return A.map((v, k) => lerp(v, B[k], t));
+}
+
+/* --- Interacción: hover en tarjetas, clic en botes, demo del tapón --- */
+let hotIndex = -1;
+document.querySelectorAll(".pcard").forEach(el => {
+  const idx = +el.dataset.bottle;
+  el.addEventListener("pointerenter", () => { hotIndex = idx; const b = bottles[idx]; if (b) b.userData.spin += Math.PI * 2; });
+  el.addEventListener("pointerleave", () => { hotIndex = -1; });
+});
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+canvas.style.pointerEvents = "none";
+addEventListener("click", e => {
+  if (e.target.closest("a, button, .pcard")) return;
+  ndc.set(e.clientX / innerWidth * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+  ray.setFromCamera(ndc, camera);
+  const hits = ray.intersectObjects(bottles.filter(Boolean).map(b => b.userData.front));
+  if (hits.length) { const b = hits[0].object.parent; b.userData.spin += Math.PI * 2; burst(b, 60, 0xffffff); }
+});
+
+/* Partículas de polvo de creatina que caen del tapón */
+const powderN = 700;
+const powderGeo = new THREE.BufferGeometry();
+const pPos = new Float32Array(powderN * 3), pVel = new Float32Array(powderN * 3), pLife = new Float32Array(powderN);
+powderGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
+const powder = new THREE.Points(powderGeo, new THREE.PointsMaterial({ size: 0.06, map: dropTex, transparent: true, depthWrite: false, color: 0xffffff }));
+world.add(powder);
+let pCursor = 0;
+function burst(b, n, color) {
+  powder.material.color.setHex(color);
+  const top = new THREE.Vector3(0, b.userData.h * 0.47, 0.25).applyMatrix4(b.matrixWorld);
+  for (let k = 0; k < n; k++) {
+    const i = pCursor = (pCursor + 1) % powderN;
+    pPos[i*3] = top.x + (Math.random() - 0.5) * 0.25; pPos[i*3+1] = top.y; pPos[i*3+2] = top.z;
+    pVel[i*3] = (Math.random() - 0.5) * 0.6; pVel[i*3+1] = -Math.random() * 1.2 - 0.3; pVel[i*3+2] = (Math.random() - 0.5) * 0.4;
+    pLife[i] = 1.2 + Math.random() * 0.8;
+  }
+}
+const stepEls = [st1, st2, st3];
+let snapping = false;
+function snap() {
+  const b = bottles[3]; if (!b || snapping) return;
+  snapping = true;
+  stepEls.forEach(s => s.classList.remove("on"));
+  st1.classList.add("on");
+  b.userData.press = 1;
+  const pour = setInterval(() => burst(b, 26, 0xffffff), 60);
+  setTimeout(() => { clearInterval(pour); st1.classList.remove("on"); st2.classList.add("on"); b.userData.shake = 1.4; }, 1300);
+  setTimeout(() => { st2.classList.remove("on"); st3.classList.add("on"); b.userData.spin += Math.PI * 2; }, 2800);
+  setTimeout(() => { st3.classList.remove("on"); snapping = false; }, 4200);
+}
+document.getElementById("snapBtn").addEventListener("click", snap);
+new IntersectionObserver(es => es.forEach(e => e.isIntersecting && setTimeout(snap, 700)), { threshold: 0.6 }).observe(document.getElementById("crea"));
+
+
+/* ============================================================
+   Spot: pantalla 3D que sigue al ratón y reproductor propio
+   ============================================================ */
+const screenEl = document.getElementById("screen"), vid = document.getElementById("spotVideo");
+const fill = document.getElementById("spotFill"), soundBtn = document.getElementById("spotSound"), toggleBtn = document.getElementById("spotToggle");
+const setPlaying = on => { screenEl.classList.toggle("playing", on); screenEl.classList.toggle("paused", !on); toggleBtn.textContent = on ? "Pausa" : "Play"; };
+document.getElementById("dropPlay").addEventListener("click", () => { vid.muted = false; soundBtn.textContent = "🔊 Sonido"; vid.play(); });
+toggleBtn.addEventListener("click", () => vid.paused ? vid.play() : vid.pause());
+soundBtn.addEventListener("click", () => { vid.muted = !vid.muted; soundBtn.textContent = vid.muted ? "🔇 Activar sonido" : "🔊 Sonido"; });
+document.getElementById("spotFull").addEventListener("click", () => screenEl.requestFullscreen?.());
+document.getElementById("spotTrack").addEventListener("click", e => { const r = e.currentTarget.getBoundingClientRect(); vid.currentTime = (e.clientX - r.left) / r.width * vid.duration; });
+vid.addEventListener("play", () => setPlaying(true));
+vid.addEventListener("pause", () => setPlaying(false));
+vid.addEventListener("timeupdate", () => { fill.style.width = (vid.currentTime / vid.duration * 100) + "%"; });
+new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting && e.intersectionRatio > 0.55) { if (vid.paused && !vid.dataset.auto) { vid.dataset.auto = 1; vid.play().catch(() => {}); } }
+  else if (!e.isIntersecting && !vid.paused) vid.pause();
+}), { threshold: [0, 0.55] }).observe(screenEl);
+screenEl.addEventListener("pointermove", e => {
+  const r = screenEl.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+  screenEl.style.transform = `rotateY(${x * 10}deg) rotateX(${-y * 8}deg) scale(1.01)`;
+});
+screenEl.addEventListener("pointerleave", () => { screenEl.style.transform = ""; });
+
+
+/* ============================================================
+   Un día con Puleva Health: scroll horizontal, cielo y reloj
+   ============================================================ */
+document.querySelectorAll(".m-prod").forEach(img => { img.src = IMG[img.dataset.img]; });
+const dia = document.getElementById("dia"), diaTrack = document.getElementById("diaTrack");
+const diaSky = document.getElementById("diaSky"), diaSun = document.getElementById("diaSun"), diaClock = document.getElementById("diaClock");
+const diaDots = [...document.querySelectorAll("#diaDots i")];
+const SKY = [ // amanecer, mañana, mediodía, atardecer, noche
+  ["#ff9e5e", "#2a5db0"], ["#5fb2ff", "#1e6fd9"], ["#3d8cf0", "#003086"], ["#f26b2a", "#5a2a7a"], ["#0b1a3f", "#001a4d"],
+];
+const HOURS = [8, 11, 14.5, 18.5, 20];
+const hex = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const mix = (a, b, t) => "rgb(" + hex(a).map((v, i) => Math.round(v + (hex(b)[i] - v) * t)).join(",") + ")";
+function updateDia() {
+  const r = dia.getBoundingClientRect();
+  const p = Math.min(1, Math.max(0, -r.top / (dia.offsetHeight - innerHeight)));
+  const maxX = diaTrack.scrollWidth - innerWidth;
+  diaTrack.style.transform = `translateX(${-p * maxX}px)`;
+  const f = p * (SKY.length - 1), i = Math.min(SKY.length - 2, Math.floor(f)), t = f - i;
+  diaSky.style.setProperty("--sky-a", mix(SKY[i][0], SKY[i + 1][0], t));
+  diaSky.style.setProperty("--sky-b", mix(SKY[i][1], SKY[i + 1][1], t));
+  const night = p > 0.86;
+  diaSun.classList.toggle("moon", night);
+  diaSun.style.left = (12 + p * 76) + "%";
+  diaSun.style.top = (62 - Math.sin(Math.min(p, 0.86) / 0.86 * Math.PI) * 44) + "%";
+  if (night) diaSun.style.top = "18%";
+  // el reloj se queda en la hora de cada momento y solo corre en las transiciones
+  const near = Math.round(f), snap = Math.abs(f - near) < 0.22;
+  const h = snap ? HOURS[near] : HOURS[i] + (HOURS[i + 1] - HOURS[i]) * t;
+  diaClock.textContent = String(Math.floor(h)).padStart(2, "0") + ":" + String(Math.floor((h % 1) * 60 / 5) * 5).padStart(2, "0");
+  diaDots.forEach((d, k) => d.classList.toggle("on", Math.round(f) === k));
+}
+// inclinación del producto con el ratón
+document.querySelectorAll(".m-prod").forEach(img => {
+  img.parentElement.addEventListener("pointermove", e => {
+    const x = e.clientX / innerWidth - 0.5, y = e.clientY / innerHeight - 0.5;
+    img.style.transform = `perspective(900px) rotateY(${x * 18}deg) rotateX(${-y * 10}deg)`;
+  });
+});
+// tarjetas que giran también al tocar (móvil)
+document.querySelectorAll(".flip").forEach(f => f.addEventListener("click", () => f.classList.toggle("on")));
+// medidor de scroll en forma de bote
+const meterMilk = document.getElementById("meterMilk");
+document.getElementById("meter").addEventListener("click", () => scrollTo({ top: 0, behavior: "smooth" }));
+
+/* --- Bucle de animación --- */
+const clock = new THREE.Clock();
+let pmx = 0, pmy = 0;
+const progress = document.getElementById("progress");
+function frame() {
+  const dt = Math.min(clock.getDelta(), 0.05), t = clock.elapsedTime;
+  cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2;
+  cursor.style.transform = `translate(${cx}px, ${cy}px) rotate(-45deg)`;
+  const prog = scrollY / (document.body.scrollHeight - innerHeight);
+  meterMilk.style.height = (prog * 100) + "%";
+  updateDia();
+
+  const sf = computeState();
+  stateF += (sf - stateF) * 0.08;
+
+  const narrow = innerWidth / innerHeight < 1.1;
+  const xScale = narrow ? 1 : Math.min(1, (innerWidth / innerHeight) / 1.75);
+  const sScale = 1;
+
+  waveMat.uniforms.uTime.value = t;
+  const wy = lerp(WAVE_Y[Math.floor(stateF)], WAVE_Y[Math.min(Math.floor(stateF) + 1, WAVE_Y.length - 1)], stateF % 1);
+  wave.position.y += (wy - wave.position.y) * 0.08;
+  waveMat.uniforms.uLift.value = Math.max(0, 1 - Math.abs(stateF - IDX("finale")));
+
+  pmx += ((mx / innerWidth - 0.5) - pmx) * 0.05;
+  pmy += ((my / innerHeight - 0.5) - pmy) * 0.05;
+  world.rotation.y = pmx * 0.25;
+  world.rotation.x = pmy * 0.08;
+  camera.position.x = pmx * 0.6;
+  camera.lookAt(0, 0, 0);
+
+  bottles.forEach((b, i) => {
+    if (!b) return;
+    const u = b.userData;
+    let [x, y, z, ry, s, o] = target(i, stateF, narrow ? MSTATES : STATES);
+    if (!narrow && Math.abs(stateF - IDX("numbers")) < 0.5) { // órbita lenta en la sección de cifras
+      const a = t * 0.25 + i * (Math.PI * 2 / 5);
+      x = Math.cos(a) * 6.2; z = -9 + Math.sin(a) * 2.5; y = Math.sin(a * 2) * 0.8 + 0.6;
+    }
+    const hot = hotIndex === i ? 1 : 0;
+    u.hot += (hot - u.hot) * 0.12;
+    const bob = Math.sin(t * 1.3 + i * 1.7) * 0.12;
+    u.cur.x += (x * xScale - u.cur.x) * 0.07;
+    u.cur.y += (y + bob - u.cur.y) * 0.07;
+    u.cur.z += (z - u.cur.z) * 0.07;
+    u.cur.s += (s * sScale * (1 + u.hot * 0.12) - u.cur.s) * 0.08;
+    u.cur.o += (o - u.cur.o) * 0.08;
+    if (u.spin > 0) { const step = Math.min(u.spin, dt * 7); u.spin -= step; u.cur.ry += step; }
+    const sway = Math.sin(t * 0.7 + i) * 0.18;
+    const baseRy = ry + sway;
+    u.cur.ry = ((u.cur.ry % (Math.PI * 2)) + Math.PI * 2) % (Math.PI * 2);
+    let dRy = baseRy - u.cur.ry; dRy = Math.atan2(Math.sin(dRy), Math.cos(dRy));
+    if (u.spin <= 0) u.cur.ry += dRy * 0.06;
+    u.shake = Math.max(0, (u.shake || 0) - dt);
+    const press = u.press = Math.max(0, (u.press || 0) - dt * 1.5);
+    b.position.set(u.cur.x, u.cur.y - press * 0.08, u.cur.z);
+    b.rotation.set(0, u.cur.ry, Math.sin(t * 40) * 0.12 * Math.min(1, u.shake));
+    b.scale.setScalar(u.cur.s * (1 - press * 0.04));
+    b.visible = u.cur.o > 0.02;
+    b.children.forEach(m => { if (m.material) { m.material.transparent = true; m.material.opacity = (m.material.blending === THREE.AdditiveBlending ? 1 : 1) * u.cur.o; } });
+    shineMats[i] && (shineMats[i].uniforms.uTime.value = t, shineMats[i].uniforms.uBoost.value = u.hot);
+  });
+
+  // gotas que suben despacio
+  for (let i = 0; i < dropCount; i++) {
+    dropPos[i*3+1] += dropSpeed[i] * dt * 0.6;
+    dropPos[i*3] += Math.sin(t + i) * dt * 0.05;
+    if (dropPos[i*3+1] > 7.5) dropPos[i*3+1] = -7.5;
+  }
+  dropGeo.attributes.position.needsUpdate = true;
+
+  // polvo de creatina con gravedad
+  for (let i = 0; i < powderN; i++) {
+    if (pLife[i] <= 0) { pPos[i*3+1] = -999; continue; }
+    pLife[i] -= dt;
+    pVel[i*3+1] -= 3.2 * dt;
+    pPos[i*3] += pVel[i*3] * dt; pPos[i*3+1] += pVel[i*3+1] * dt; pPos[i*3+2] += pVel[i*3+2] * dt;
+  }
+  powderGeo.attributes.position.needsUpdate = true;
+
+  renderer.render(scene, camera);
+  requestAnimationFrame(frame);
+}
+frame();
+
+addEventListener("resize", () => {
+  renderer.setSize(innerWidth, innerHeight);
+  camera.aspect = innerWidth / innerHeight;
+  camera.updateProjectionMatrix();
+});
+</script>
+</body>
+</html>
