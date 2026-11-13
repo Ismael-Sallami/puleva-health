@@ -27,10 +27,33 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            deck/borrador1/package-lock.json
+            deck/borrador2/package-lock.json
+
+      - name: Compilar las presentaciones
+        run: |
+          for d in deck/borrador1 deck/borrador2; do
+            (cd "$d" && npm ci && npm run build)
+          done
+
+      - name: Montar el sitio
+        run: |
+          mkdir -p _site
+          rsync -a --exclude '.git' --exclude '.github' --exclude 'deck' --exclude '_site' ./ _site/
+          mkdir -p _site/deck
+          cp -r deck/borrador1/dist _site/deck/borrador1
+          cp -r deck/borrador2/dist _site/deck/borrador2
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
