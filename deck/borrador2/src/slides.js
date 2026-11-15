@@ -58,7 +58,7 @@ const slapCard = (el, k) => {
 export const SLIDES = [
   // 0 ─────────────────────────────────────────── PORTADA (se imprime en tres pasadas)
   {
-    id: 'portada', theme: 'paper', title: 'Portada', speaker: 'P1', time: 'antes de empezar',
+    id: 'portada', theme: 'paper', title: 'Portada', speaker: 'Ismael (pulsa → antes de empezar)', time: 'antes de empezar',
     notes: `Está en pantalla mientras subís: papel en blanco con marcas de registro.
 → La risógrafo imprime la portada en tres pasadas (amarillo, rosa, azul) y caen los botes. Pulsadlo justo antes de empezar a hablar.
 → siguiente: empieza P1 con la familia.`,
@@ -93,7 +93,7 @@ export const SLIDES = [
 
   // 1 ─────────────────────────────────────────── UNA FAMILIA
   {
-    id: 'familia', theme: 'paper', title: 'Una familia', speaker: 'P1', time: '0:00–1:05',
+    id: 'familia', theme: 'paper', title: 'Una familia', speaker: 'Ismael · Jesús = Carmen · David = Álex', time: '0:00–1:05',
     notes: `→ Álex: "Os voy a presentar a una familia. Álex tiene 20 años y acaba de apuntarse al gimnasio. Un día llega a casa con un bote de creatina de un kilo, y su madre lo mira como si hubiera traído algo ilegal: «eso son polvos, eso no puede ser sano»."
 → Carmen: "Su madre, Carmen, tiene 52 años. A las cuatro de la tarde está agotada, le cuesta concentrarse y lleva meses diciendo que tendría que cuidarse más. Pero cuando alguien le sugiere un complemento, contesta: «yo no quiero estar tomando pastillas como si estuviera enferma»."
 → "¿A cuántos os suena alguna de estas dos frases?"  [PAUSA 2 s, mirar al jurado]`,
@@ -143,7 +143,7 @@ export const SLIDES = [
 
   // 2 ─────────────────────────────────────────── LA NEVERA
   {
-    id: 'nevera', theme: 'ink-blue', title: 'En su nevera hay leche Puleva', speaker: 'P1', time: '1:05–1:15',
+    id: 'nevera', theme: 'ink-blue', title: 'En su nevera hay leche Puleva', speaker: 'Ismael', time: '1:05–1:15',
     notes: `→ (se abre la nevera) "Lo curioso es que los dos tienen algo en común: en su nevera hay leche Puleva."
 Deja que la puerta se abra antes de decir "leche Puleva".`,
     html: `${DEFS}
@@ -167,7 +167,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 
   // 3 ─────────────────────────────────────────── EL LINEAL
   {
-    id: 'lineal', theme: 'paper', title: 'El problema es el formato', speaker: 'P1', time: '1:15–1:55',
+    id: 'lineal', theme: 'paper', title: 'El problema es el formato', speaker: 'Jesús (+ David remata)', time: '1:15–1:55',
     notes: `"El problema no es la nutrición, es el formato."
 → (fotos del lineal) "Mirad el lineal: botes de cápsulas ordenados por marca…"
 → (sello) "…una farmacia sin farmacéutico."
@@ -204,7 +204,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 
   // 4 ─────────────────────────────────────────── TRES FRENOS
   {
-    id: 'frenos', theme: 'paper', title: 'Tres frenos', speaker: 'P1', time: '1:55–2:30',
+    id: 'frenos', theme: 'paper', title: 'Tres frenos', speaker: 'Jesús · un freno cada uno', time: '1:55–2:30',
     notes: `"El consumidor choca con tres frenos."
 → "La pastilla parece medicina, y al 37 % de los adultos le cuesta tragarla."
 → "El polvo es de gimnasio: bote, báscula, coctelera."
@@ -241,7 +241,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 
   // 5 ─────────────────────────────────────────── LA IDEA
   {
-    id: 'idea', theme: 'paper', title: 'La idea: Puleva Health', speaker: 'P2', time: '2:30–3:15',
+    id: 'idea', theme: 'paper', title: 'La idea: Puleva Health', speaker: 'Ismael · preguntas a tres voces + coro', time: '2:30–3:15',
     notes: `→ "Así que nos preguntamos: ¿y si el complemento no pareciera ni medicina ni cosa de gimnasio?"
 → "¿Y si fuera algo que ya está en tu nevera, de una marca en la que ya confías, y que te tomas en diez segundos?"
 → (se imprime la portada) "Esto es Puleva Health. Salud que se bebe."  [Destapar los botes]
@@ -325,7 +325,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 
   // 6 ─────────────────────────────────────────── DAILY (Carmen)
   {
-    id: 'daily', theme: 'paper', title: 'Daily · para Carmen', speaker: 'P2', time: '3:15–4:15', buyers: [true, 0],
+    id: 'daily', theme: 'paper', title: 'Daily · para Carmen', speaker: 'Jesús (+ Ismael remata)', time: '3:15–4:15', buyers: [true, 0],
     notes: `"Volvamos con Carmen."  [coger cada bote al nombrarlo]
 → NOW: "Su shot es Now: magnesio, teanina y vitaminas B6 y B12, que ayudan a disminuir el cansancio. El shot que sustituye al segundo café."
 → CARE: "Care, la piel desde dentro, con vitaminas C y E y zinc."
@@ -350,7 +350,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 
   // 7 ─────────────────────────────────────────── ACTIVE (Álex) + plano 3D del Crea-Snap
   {
-    id: 'active', theme: 'paper', title: 'Active · para Álex (Crea-Snap)', speaker: 'P2', time: '4:15–5:15', buyers: [true, 0],
+    id: 'active', theme: 'paper', title: 'Active · para Álex (Crea-Snap)', speaker: 'David · demo (Jesús pulsa →)', time: '4:15–5:15', buyers: [true, 0],
     notes: `"Ahora Álex."  [coger Crea-Snap]
 → "La creatina tiene un problema: disuelta en agua se degrada y deja de servir. Por eso casi no existe creatina lista para beber."
 → (se despiezan nuestras piezas reales) "Nuestra solución es guardarla en el tapón."
@@ -409,7 +409,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 
   // 8 ─────────────────────────────────────────── POR QUÉ PULEVA
   {
-    id: 'porque', theme: 'paper', title: 'Por qué Puleva', speaker: 'P3', time: '5:15–6:00', buyers: [true, 1],
+    id: 'porque', theme: 'paper', title: 'Por qué Puleva', speaker: 'Ismael · una clave cada uno', time: '5:15–6:00', buyers: [true, 1],
     notes: `"¿Por qué Puleva y no otro? Porque solo Puleva reúne tres cosas a la vez."
 → "Confianza: está entre las diez marcas más elegidas por los hogares españoles."
 → "Industria: formular, envasar y distribuir líquidos en frío a escala nacional, justo lo que un laboratorio o una marca online no saben hacer."
@@ -457,7 +457,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 
   // 9 ─────────────────────────────────────────── CONVENCER AL SÚPER
   {
-    id: 'super', theme: 'paper', title: 'Convencer al supermercado', speaker: 'P3', time: '6:00–7:00', buyers: [true, 1],
+    id: 'super', theme: 'paper', title: 'Convencer al supermercado', speaker: 'David · Ismael = comprador', time: '6:00–7:00', buyers: [true, 1],
     notes: `"Para llegar a Carmen y a Álex, antes hay que convencer al supermercado. Y le damos lo que hoy no tiene."
 → (ticket) "Rotación, porque Daily se recompra cada semana. Tráfico, con un millón al año en televisión y redes, con embajadores como Roberto Leal y SofiG. Un 30 % de margen. Y una categoría que hoy se le escapa a internet."
 → (plano) "Estaremos en tres puntos de la tienda: la nevera de lácteos, un módulo en el pasillo de suplementos y neveras de caja para la compra por impulso, además de neveras en gimnasios."
@@ -523,7 +523,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 
   // 10 ─────────────────────────────────────────── CONVENCER A LACTALIS
   {
-    id: 'lactalis', theme: 'graph', title: 'Convencer a Lactalis', speaker: 'P1', time: '7:00–8:15', buyers: [true, 2],
+    id: 'lactalis', theme: 'graph', title: 'Convencer a Lactalis', speaker: 'David (+ Ismael mes 29, Jesús deslizador)', time: '7:00–8:15', buyers: [true, 2],
     notes: `"Y por último, convencer a Lactalis. Con números prudentes. Invertimos 3 millones al año: dos en comercial y uno en medios."
 → (barras) "Con una cuota que pasa del 4 al 13 %, la venta neta llega a 15,1 millones en el año 3…"
 → (línea) "…el EBITDA es positivo ese mismo año y el equilibrio mensual llega en el mes 29."
@@ -610,7 +610,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 
   // 11 ─────────────────────────────────────────── LA UNIDAD
   {
-    id: 'unidad', theme: 'paper', title: 'Quién lo lleva', speaker: 'P1', time: '8:15–8:45', buyers: [true, 2],
+    id: 'unidad', theme: 'paper', title: 'Quién lo lleva', speaker: 'Jesús (+ Ismael UGR)', time: '8:15–8:45', buyers: [true, 2],
     notes: `→ "Para llevarlo, una unidad de negocio con cuenta de resultados propia y cuatro perfiles: regulatorio y científico, KAM de gran distribución, brand manager y un tecnólogo de bebidas de la propia plantilla de I+D. El talento nuevo, de la UGR."
 → (sello: LACTALIS ✓)`,
     html: `
@@ -638,7 +638,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 
   // 12 ─────────────────────────────────────────── UN MARTES POR LA MAÑANA
   {
-    id: 'martes', theme: 'paper', title: 'Un martes por la mañana', speaker: 'P2', time: '8:45–9:30', buyers: [true, 3],
+    id: 'martes', theme: 'paper', title: 'Un martes por la mañana', speaker: 'Los tres · coro final', time: '8:45–9:30', buyers: [true, 3],
     notes: `"Volvamos a casa de Álex y Carmen."
 → "Un martes por la mañana, Carmen se toma su Now antes de salir."
 → "Álex mete un Crea-Snap en la mochila."

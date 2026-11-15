@@ -9,7 +9,7 @@ const PARTS = [
   { key: 'botella', file: 'models/Active_80ml_Botella.stl', line: 0xffffff, fill: 0x2a4fd6, fillOp: 0.35, explode: 0, label: 'Botella 80 ml', sub: 'agua funcional cítrica' },
   { key: 'carcasa', file: 'models/Active_80ml_Tapon_Carcasa_TR28x3.stl', line: 0xffd400, fill: 0x2a4fd6, fillOp: 0.5, explode: 46, label: 'Cámara seca', sub: '3 g de creatina, sin tocar el líquido' },
   { key: 'pulsador', file: 'models/Active_80ml_Pulsador_Creatina.stl', line: 0xffffff, fill: 0xff48b0, fillOp: 0.9, explode: 92, label: 'Pulsador', sub: 'rompe el sello y la deja caer' },
-  { key: 'tapa', file: 'models/Active_80ml_Tapa_Seguridad.stl', line: 0xffffff, fill: 0x2a4fd6, fillOp: 0.3, explode: 128, label: 'Tapa de seguridad', sub: 'evita pulsar sin querer' },
+  { key: 'pinza', file: 'models/Active_80ml_Pinza_Seguridad.stl', line: 0xffd400, fill: 0xffd400, fillOp: 0.85, explode: 120, label: 'Pinza de seguridad', sub: 'se quita antes de pulsar' },
 ];
 
 const cache = {};
@@ -99,7 +99,8 @@ export function createBlueprint(host, labelHost) {
     meshes.forEach((m, i) => {
       let y = m.userData.explode * st.explode;
       if (m.userData.key === 'pulsador') y -= 13 * st.press;
-      if (m.userData.key === 'tapa') { y += 70 * st.safety; m.rotation.z = st.safety * 0.6; m.userData.lineMat.opacity = 1 - st.safety; m.userData.fillMat.opacity = m.userData.fillOp * (1 - st.safety); }
+      // la pinza se saca de lado antes de pulsar
+      if (m.userData.key === 'pinza') { m.position.x = 70 * st.safety; m.rotation.z = -st.safety * 0.35; m.userData.lineMat.opacity = 1 - st.safety; m.userData.fillMat.opacity = m.userData.fillOp * (1 - st.safety); }
       m.position.y = y;
       m.scale.setScalar(0.6 + 0.4 * st.intro);
       m.visible = st.intro > 0.01;
@@ -119,7 +120,7 @@ export function createBlueprint(host, labelHost) {
       v.project(camera);
       const x = (v.x * 0.5 + 0.5) * W, y = (-v.y * 0.5 + 0.5) * H;
       const lx = W * 0.72, ly = 110 + i * 0 + (H - 220) * (1 - i / (PARTS.length - 1));
-      const vis = st.labels * (m.userData.key === 'tapa' ? 1 - st.safety : 1);
+      const vis = st.labels * (m.userData.key === 'pinza' ? 1 - st.safety : 1);
       labels[i].style.transform = `translate(${lx + 14}px, ${ly - 24}px)`;
       labels[i].style.opacity = vis;
       lp[i].setAttribute('d', `M${x} ${y} L${lx - 40} ${ly} L${lx} ${ly}`);

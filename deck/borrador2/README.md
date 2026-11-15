@@ -37,21 +37,23 @@ Al abrirla aparece una pantalla de inicio: **«Empezar en pantalla completa»** 
 
 ## Las 13 páginas
 
+Quién dice qué en cada página: `presentacion/reparto.md`.
+
 | # | Página | Ponente | Tiempo | Qué pasa |
 |---|---|---|---|---|
 | 0 | Portada | — | antes de empezar | Se imprime en tres pasadas de tinta |
-| 1 | Una familia | P1 | 0:00–1:05 | Álex y Carmen ilustrados, el bote de 1 kg cae, el reloj gira hasta las 16:00, bocadillos de cómic, "¿A cuántos os suena…?" |
-| 2 | La nevera | P1 | 1:05–1:15 | Se abre la nevera con luz y aparece la leche Puleva |
-| 3 | El lineal | P1 | 1:15–1:55 | Las fotos reales del lineal (del informe), pegadas con celo, y el sello "farmacia sin farmacéutico" |
-| 4 | Tres frenos | P1 | 1:55–2:30 | Derrape, chirrido y tres señales de stop que se estampan |
-| 5 | La idea | P2 | 2:30–3:15 | Preguntas "¿y si…?", la página se rasga y aparece la portada PULEVA HEALTH, caen los 5 botes y aparecen los 3 compradores |
-| 6 | Daily · Carmen | P2 | 3:15–4:15 | Cromos de Now, Care y Shield que se estampan en el álbum y se dan la vuelta |
-| 7 | Active · Álex | P2 | 4:15–5:15 | **Plano 3D del Crea-Snap con los STL reales impresos**: se despieza, se monta, se pulsa y cae la creatina (plan B de la demo) + ClearPro + sello CONSUMIDOR ✓ |
-| 8 | Por qué Puleva | P3 | 5:15–6:00 | 3 claves + mapa del tesoro: "aquí no hay nadie" y Puleva Health cae en la X |
-| 9 | Súper | P3 | 6:00–7:00 | Ticket de caja que se imprime, plano de tienda, canales descartados, calendario + SÚPER ✓ |
-| 10 | Lactalis | P1 | 7:00–8:15 | Papel milimetrado, barras, EBITDA, mes 29, pósits y un **deslizador de cuota que se puede tocar** (11/13/15 %) |
-| 11 | Quién lo lleva | P1 | 8:15–8:45 | Organigrama de la unidad + LACTALIS ✓ |
-| 12 | Un martes | P2 | 8:45–9:30 | Tira cómica de 3 viñetas, "Nadie ha tomado una pastilla…", portada final y Gracias. Un paso más reproduce el spot de 22 s |
+| 1 | Una familia | Ismael | 0:00–1:05 | Álex y Carmen ilustrados, el bote de 1 kg cae, el reloj gira hasta las 16:00, bocadillos de cómic, "¿A cuántos os suena…?" |
+| 2 | La nevera | Ismael | 1:05–1:15 | Se abre la nevera con luz y aparece la leche Puleva |
+| 3 | El lineal | Jesús | 1:15–1:55 | Las fotos reales del lineal (del informe), pegadas con celo, y el sello "farmacia sin farmacéutico" |
+| 4 | Tres frenos | Jesús | 1:55–2:30 | Derrape, chirrido y tres señales de stop que se estampan |
+| 5 | La idea | Ismael | 2:30–3:15 | Preguntas "¿y si…?", la página se rasga y aparece la portada PULEVA HEALTH, caen los 5 botes y aparecen los 3 compradores |
+| 6 | Daily · Carmen | Jesús | 3:15–4:15 | Cromos de Now, Care y Shield que se estampan en el álbum y se dan la vuelta |
+| 7 | Active · Álex | David | 4:15–5:15 | **Plano 3D del Crea-Snap con los STL reales** (modelo nuevo con pinza de seguridad): se despieza, se quita la pinza, se pulsa y cae la creatina (plan B de la demo) + ClearPro + sello CONSUMIDOR ✓ |
+| 8 | Por qué Puleva | Ismael | 5:15–6:00 | 3 claves + mapa del tesoro: "aquí no hay nadie" y Puleva Health cae en la X |
+| 9 | Súper | David | 6:00–7:00 | Ticket de caja que se imprime, plano de tienda, canales descartados, calendario + SÚPER ✓ |
+| 10 | Lactalis | David | 7:00–8:15 | Papel milimetrado, barras, EBITDA, mes 29, pósits y un **deslizador de cuota que se puede tocar** (11/13/15 %) |
+| 11 | Quién lo lleva | Jesús | 8:15–8:45 | Organigrama de la unidad + LACTALIS ✓ |
+| 12 | Un martes | Los tres | 8:45–9:30 | Tira cómica de 3 viñetas, "Nadie ha tomado una pastilla…", portada final y Gracias. Un paso más reproduce el spot de 22 s |
 
 El marcador "Hay que convencer a: Consumidor · Súper · Lactalis" se queda en la esquina desde la página 5 y se va sellando.
 
