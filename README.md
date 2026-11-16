@@ -32,10 +32,11 @@ python3 -m http.server 8000
 
 ## Presentaciones de la final
 
-Dos versiones de la presentación para los directivos, en `deck/`. Se publican compiladas junto a la web:
+Tres versiones de la presentación para los directivos, en `deck/`. Se publican compiladas junto a la web:
 
 | Versión | Estilo | Ver online |
 | --- | --- | --- |
+| **Borrador 3** · "Claymorphism" | Claymorphism (arcilla / plastilina 3D suave): volúmenes inflados, doble bisel interior y modelo 3D mate. Mantiene todo el contenido y animaciones del Borrador 2 | [Abrir](https://ismael-sallami.github.io/puleva-health/deck/borrador3/) |
 | **Borrador 2** · "Fanzine de la final" | Risógrafo: papel, tintas fluorescentes, cómic. Sigue el guion de `presentacion/guion.md` (9:30, 3 ponentes) | [Abrir](https://ismael-sallami.github.io/puleva-health/deck/borrador2/) · [Spot "10 SEGUNDOS"](https://ismael-sallami.github.io/puleva-health/deck/borrador2/img/spot10.mp4) |
 | **Borrador 1** | Oscura, con bote 3D y leche simulada en GPU | [Abrir](https://ismael-sallami.github.io/puleva-health/deck/borrador1/) |
 

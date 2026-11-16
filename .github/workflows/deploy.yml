@@ -35,10 +35,11 @@ jobs:
           cache-dependency-path: |
             deck/borrador1/package-lock.json
             deck/borrador2/package-lock.json
+            deck/borrador3/package-lock.json
 
       - name: Compilar las presentaciones
         run: |
-          for d in deck/borrador1 deck/borrador2; do
+          for d in deck/borrador1 deck/borrador2 deck/borrador3; do
             (cd "$d" && npm ci && npm run build)
           done
 
@@ -49,6 +50,7 @@ jobs:
           mkdir -p _site/deck
           cp -r deck/borrador1/dist _site/deck/borrador1
           cp -r deck/borrador2/dist _site/deck/borrador2
+          cp -r deck/borrador3/dist _site/deck/borrador3
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
