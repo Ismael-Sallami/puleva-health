@@ -6,19 +6,6 @@ const BLUE = '#140ec8', PINK = '#e11d38', YEL = '#189150', VOGUE = '#022b50', IN
 export const DEFS = `
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <!-- Filtro 3D Claymorphism para polígonos y piezas SVG -->
-    <filter id="clayBevel" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
-      <feOffset in="blur" dx="4" dy="6" result="offsetBlur"/>
-      <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.75" specularExponent="20" lighting-color="#ffffff" result="specOut">
-        <fePointLight x="-120" y="-160" z="220"/>
-      </feSpecularLighting>
-      <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specMask"/>
-      <feMerge>
-        <feMergeNode in="SourceGraphic"/>
-        <feMergeNode in="specMask"/>
-      </feMerge>
-    </filter>
     <!-- Puleva Red (#e11d38) -->
     <radialGradient id="clayPink" cx="30%" cy="25%" r="75%">
       <stop offset="0%" stop-color="#ff546b"/>

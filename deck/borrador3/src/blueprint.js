@@ -1,5 +1,5 @@
 // Plano técnico 3D del Crea-Snap a partir de los STL reales que imprimimos.
-// Estilo "blueprint" en tinta de risógrafo: aristas en línea, piezas con relleno plano y cotas en HTML.
+// Optimizado para navegadores modestos: geometría y aristas precalculadas una sola vez, iluminación Gouraud (MeshLambertMaterial) y pixelRatio 1.
 import * as THREE from 'three';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
 import { gsap } from './fx.js';
@@ -13,24 +13,34 @@ const PARTS = [
 ];
 
 const cache = {};
-// se cargan una vez al arrancar, así la diapositiva se monta al instante (y se puede rebobinar)
+const edgeCache = {};
+const sharedSphereGeo = new THREE.SphereGeometry(1.7, 6, 6);
+
+// se cargan y procesan una sola vez al arrancar, así la diapositiva 7 entra al instante sin tirones de CPU
 export async function preloadBlueprint() {
   const loader = new STLLoader();
-  await Promise.all(PARTS.map(async (p) => { cache[p.file] = await loader.loadAsync(p.file); }));
+  await Promise.all(PARTS.map(async (p) => {
+    const g = await loader.loadAsync(p.file);
+    g.rotateX(-Math.PI / 2); // Z arriba -> Y arriba
+    g.computeVertexNormals();
+    g.computeBoundingBox();
+    cache[p.file] = g;
+    edgeCache[p.file] = new THREE.EdgesGeometry(g, 38);
+  }));
 }
 
 export function createBlueprint(host, labelHost) {
   const W = host.clientWidth, H = host.clientHeight;
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(2, (window.devicePixelRatio || 1) * (window.__stageScale || 1)));
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(1);
   renderer.setSize(W, H);
   host.appendChild(renderer.domElement);
 
   const scene = new THREE.Scene();
-  const amb = new THREE.AmbientLight(0xf2f2f2, 1.35);
-  const dir1 = new THREE.DirectionalLight(0xffffff, 1.45);
+  const amb = new THREE.AmbientLight(0xf2f2f2, 1.4);
+  const dir1 = new THREE.DirectionalLight(0xffffff, 1.35);
   dir1.position.set(-180, 260, 320);
-  const dir2 = new THREE.DirectionalLight(0x189150, 0.65);
+  const dir2 = new THREE.DirectionalLight(0x189150, 0.55);
   dir2.position.set(220, -140, 200);
   scene.add(amb, dir1, dir2);
 
@@ -47,32 +57,29 @@ export function createBlueprint(host, labelHost) {
   const spin = new THREE.Group();
   root.add(spin);
 
-  const geos = PARTS.map((p) => cache[p.file]);
-  const meshes = PARTS.map((p, i) => {
-    const g = geos[i].clone();
-    g.rotateX(-Math.PI / 2); // Z arriba -> Y arriba
-    g.computeVertexNormals();
+  const meshes = PARTS.map((p) => {
+    const g = cache[p.file];
+    const eg = edgeCache[p.file];
     const grp = new THREE.Group();
-    const fill = new THREE.Mesh(g, new THREE.MeshStandardMaterial({
-      color: p.fill, roughness: 0.62, metalness: 0.04,
-      transparent: true, opacity: Math.min(1, p.fillOp + 0.28), depthWrite: p.key !== 'botella', side: THREE.DoubleSide,
+    const fill = new THREE.Mesh(g, new THREE.MeshLambertMaterial({
+      color: p.fill,
+      transparent: true, opacity: Math.min(1, p.fillOp + 0.25), depthWrite: p.key !== 'botella', side: THREE.DoubleSide,
     }));
-    const edges = new THREE.LineSegments(new THREE.EdgesGeometry(g, 32), new THREE.LineBasicMaterial({ color: p.line, transparent: true, opacity: 0.45 }));
+    const edges = new THREE.LineSegments(eg, new THREE.LineBasicMaterial({ color: p.line, transparent: true, opacity: 0.42 }));
     grp.add(fill, edges);
-    grp.userData = { ...p, fillMat: fill.material, lineMat: edges.material };
-    g.computeBoundingBox();
-    grp.userData.top = g.boundingBox.max.y;
-    grp.userData.bottom = g.boundingBox.min.y;
+    grp.userData = {
+      ...p, fillMat: fill.material, lineMat: edges.material,
+      top: g.boundingBox.max.y, bottom: g.boundingBox.min.y,
+    };
     spin.add(grp);
     return grp;
   });
 
   // creatina: bolitas de arcilla dentro de la cámara
   const grains = new THREE.Group();
-  const gGeo = new THREE.SphereGeometry(1.7, 10, 10);
-  const gMat = new THREE.MeshStandardMaterial({ color: 0xf2f2f2, roughness: 0.5, metalness: 0.05 });
-  for (let i = 0; i < 70; i++) {
-    const m = new THREE.Mesh(gGeo, gMat);
+  const gMat = new THREE.MeshLambertMaterial({ color: 0xf2f2f2 });
+  for (let i = 0; i < 45; i++) {
+    const m = new THREE.Mesh(sharedSphereGeo, gMat);
     const a = Math.random() * Math.PI * 2, r = Math.random() * 9;
     m.position.set(Math.cos(a) * r, 80 + Math.random() * 18, Math.sin(a) * r);
     m.userData.home = m.position.clone();
@@ -85,60 +92,90 @@ export function createBlueprint(host, labelHost) {
     const d = document.createElement('div');
     d.className = 'bp-label';
     d.innerHTML = `<b>${p.label}</b><span>${p.sub}</span>`;
+    const lx = W * 0.72, ly = 110 + (H - 220) * (1 - i / (PARTS.length - 1));
+    d.style.transform = `translate3d(${lx + 14}px, ${ly - 24}px, 0)`;
     labelHost.appendChild(d);
     return d;
   });
   const lines = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
   lines.setAttribute('class', 'bp-lines');
   lines.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  lines.innerHTML = PARTS.map(() => '<path fill="none" stroke="#f2f2f2" stroke-width="2" stroke-dasharray="6 6"/><circle r="5" fill="#e11d38"/>').join('');
+  lines.innerHTML = PARTS.map(() => '<path fill="none" stroke="#f2f2f2" stroke-width="2" stroke-dasharray="6 6" opacity="0"/><circle r="5" fill="#e11d38" opacity="0"/>').join('');
   labelHost.appendChild(lines);
   const lp = [...lines.querySelectorAll('path')];
   const lc = [...lines.querySelectorAll('circle')];
 
   const st = { explode: 0, rot: 0, auto: 1, press: 0, fall: 0, safety: 0, labels: 0, shakeA: 0, intro: 0 };
   const v = new THREE.Vector3();
+  let lastZoom = -1;
+  let labelsVisible = false;
 
   function apply() {
     const t = performance.now() / 1000;
-    // encuadre: montado se ve grande; al despiezar, la cámara se abre
-    camera.zoom = 1.6 - 0.6 * st.explode;
-    camera.updateProjectionMatrix();
+    const targetZoom = 1.6 - 0.6 * st.explode;
+    if (Math.abs(targetZoom - lastZoom) > 0.0005) {
+      camera.zoom = targetZoom;
+      camera.updateProjectionMatrix();
+      lastZoom = targetZoom;
+    }
     root.position.y = -(64 + 64 * st.explode);
     spin.rotation.y = st.rot + st.auto * t * 0.45;
-    root.rotation.z = Math.sin(t * 38) * 0.05 * st.shakeA;
-    meshes.forEach((m, i) => {
+    root.rotation.z = st.shakeA > 0.001 ? Math.sin(t * 38) * 0.05 * st.shakeA : 0;
+    const sc = 0.6 + 0.4 * st.intro;
+    const visMesh = st.intro > 0.01;
+    for (let i = 0; i < meshes.length; i++) {
+      const m = meshes[i];
       let y = m.userData.explode * st.explode;
       if (m.userData.key === 'pulsador') y -= 13 * st.press;
-      // la pinza se saca de lado antes de pulsar
-      if (m.userData.key === 'pinza') { m.position.x = 70 * st.safety; m.rotation.z = -st.safety * 0.35; m.userData.lineMat.opacity = 1 - st.safety; m.userData.fillMat.opacity = m.userData.fillOp * (1 - st.safety); }
+      if (m.userData.key === 'pinza') {
+        m.position.x = 70 * st.safety;
+        m.rotation.z = -st.safety * 0.35;
+        m.userData.lineMat.opacity = 0.42 * (1 - st.safety);
+        m.userData.fillMat.opacity = m.userData.fillOp * (1 - st.safety);
+      }
       m.position.y = y;
-      m.scale.setScalar(0.6 + 0.4 * st.intro);
-      m.visible = st.intro > 0.01;
-    });
+      m.scale.setScalar(sc);
+      m.visible = visMesh;
+    }
     grains.position.y = meshes[1].position.y;
-    grains.children.forEach((g, i) => {
-      const k = Math.min(1, Math.max(0, st.fall * 1.6 - (i % 10) * 0.06));
-      g.position.y = g.userData.home.y - k * (40 + (i % 7) * 6);
-      g.position.x = g.userData.home.x * (1 + k * 1.6);
-      g.position.z = g.userData.home.z * (1 + k * 1.6);
-      g.visible = st.intro > 0.5;
-    });
-    // etiquetas: proyectar el punto lateral de cada pieza
-    meshes.forEach((m, i) => {
-      v.set(24, (m.userData.top + m.userData.bottom) / 2, 0);
-      m.localToWorld(v);
-      v.project(camera);
-      const x = (v.x * 0.5 + 0.5) * W, y = (-v.y * 0.5 + 0.5) * H;
-      const lx = W * 0.72, ly = 110 + i * 0 + (H - 220) * (1 - i / (PARTS.length - 1));
-      const vis = st.labels * (m.userData.key === 'pinza' ? 1 - st.safety : 1);
-      labels[i].style.transform = `translate(${lx + 14}px, ${ly - 24}px)`;
-      labels[i].style.opacity = vis;
-      lp[i].setAttribute('d', `M${x} ${y} L${lx - 40} ${ly} L${lx} ${ly}`);
-      lp[i].style.opacity = vis;
-      lc[i].setAttribute('cx', x); lc[i].setAttribute('cy', y);
-      lc[i].style.opacity = vis;
-    });
+    const showGrains = st.intro > 0.5;
+    grains.visible = showGrains;
+    if (showGrains && st.fall > 0.001) {
+      const ch = grains.children;
+      for (let i = 0; i < ch.length; i++) {
+        const g = ch[i];
+        const k = Math.min(1, Math.max(0, st.fall * 1.6 - (i % 10) * 0.06));
+        g.position.y = g.userData.home.y - k * (40 + (i % 7) * 6);
+        g.position.x = g.userData.home.x * (1 + k * 1.6);
+        g.position.z = g.userData.home.z * (1 + k * 1.6);
+      }
+    }
+    // actualizar etiquetas en DOM solo cuando están visibles
+    if (st.labels > 0.005) {
+      labelsVisible = true;
+      for (let i = 0; i < meshes.length; i++) {
+        const m = meshes[i];
+        v.set(24, (m.userData.top + m.userData.bottom) / 2, 0);
+        m.localToWorld(v);
+        v.project(camera);
+        const x = (v.x * 0.5 + 0.5) * W, y = (-v.y * 0.5 + 0.5) * H;
+        const lx = W * 0.72, ly = 110 + (H - 220) * (1 - i / (PARTS.length - 1));
+        const vis = st.labels * (m.userData.key === 'pinza' ? 1 - st.safety : 1);
+        labels[i].style.opacity = vis;
+        lp[i].setAttribute('d', `M${x.toFixed(1)} ${y.toFixed(1)} L${(lx - 40).toFixed(1)} ${ly.toFixed(1)} L${lx.toFixed(1)} ${ly.toFixed(1)}`);
+        lp[i].style.opacity = vis;
+        lc[i].setAttribute('cx', x.toFixed(1));
+        lc[i].setAttribute('cy', y.toFixed(1));
+        lc[i].style.opacity = vis;
+      }
+    } else if (labelsVisible) {
+      labelsVisible = false;
+      for (let i = 0; i < meshes.length; i++) {
+        labels[i].style.opacity = 0;
+        lp[i].style.opacity = 0;
+        lc[i].style.opacity = 0;
+      }
+    }
   }
   const tick = () => { apply(); renderer.render(scene, camera); };
   gsap.ticker.add(tick);
@@ -176,7 +213,8 @@ export function createBlueprint(host, labelHost) {
     destroy() {
       gsap.ticker.remove(tick);
       renderer.dispose();
-      meshes.forEach((m) => m.traverse((o) => { if (o.geometry) o.geometry.dispose(); }));
+      meshes.forEach((m) => { m.userData.fillMat.dispose(); m.userData.lineMat.dispose(); });
+      gMat.dispose();
       renderer.domElement.remove();
       labels.forEach((l) => l.remove());
       lines.remove();

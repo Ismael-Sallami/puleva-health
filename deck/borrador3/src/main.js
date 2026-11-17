@@ -45,7 +45,25 @@ async function deck() {
   fit();
   addEventListener('resize', fit);
 
-  await Promise.all([document.fonts.ready, preloadBlueprint().catch((e) => console.warn(e)),
+  const preloadImages = async () => {
+    const urls = [
+      'img/care.webp', 'img/now.webp', 'img/shield.webp', 'img/creasnap.webp', 'img/clearpro.webp',
+      'img/lineal1.jpg', 'img/lineal2.jpg', 'img/lineal3.jpg', 'img/lineal4.jpg',
+    ];
+    const cacheBox = document.createElement('div');
+    cacheBox.style.cssText = 'position:fixed;left:0;top:0;width:1px;height:1px;opacity:0.001;pointer-events:none;overflow:hidden;z-index:-1';
+    document.body.appendChild(cacheBox);
+    await Promise.all(urls.map(async (u) => {
+      const img = new Image();
+      img.decoding = 'sync';
+      img.loading = 'eager';
+      img.src = u;
+      cacheBox.appendChild(img);
+      try { await img.decode(); } catch (_) {}
+    }));
+  };
+
+  await Promise.all([document.fonts.ready, preloadBlueprint().catch((e) => console.warn(e)), preloadImages(),
     document.fonts.load('400 80px Anton'), document.fonts.load('400 40px "Permanent Marker"')]);
 
   // ---- marcador de los tres compradores
@@ -141,10 +159,9 @@ async function deck() {
         busy = false;
       },
     });
-    tl.set(roller, { autoAlpha: 1, y: -160 })
-      .fromTo(fresh, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 0.85, ease: 'power2.inOut' }, 0)
-      .to(roller, { y: 1080, duration: 0.85, ease: 'power2.inOut' }, 0)
-      .fromTo(fresh, { filter: 'saturate(2.2) contrast(1.15)' }, { filter: 'saturate(1) contrast(1)', duration: 1.1, ease: 'power2.out' }, 0.2)
+    tl.set(roller, { autoAlpha: 1, y: -160, force3D: true })
+      .fromTo(fresh, { clipPath: 'inset(0 0 100% 0)' }, { clipPath: 'inset(0 0 0% 0)', duration: 0.8, ease: 'power2.inOut' }, 0)
+      .to(roller, { y: 1080, duration: 0.8, ease: 'power2.inOut', force3D: true }, 0)
       .set(roller, { autoAlpha: 0 })
       .call(() => { if (cur) cur.play(); }, null, 0.35);
   }

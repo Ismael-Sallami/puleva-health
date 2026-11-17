@@ -273,20 +273,18 @@ export const $ = (root, sel) => root.querySelector(sel);
 export const $$ = (root, sel) => [...root.querySelectorAll(sel)];
 
 
-// ---------- Claymorphism FX ----------
+// ---------- Claymorphism FX (optimizado para GPU: sin animar textShadow ni filter:blur) ----------
 const PINK = '#e11d38', YEL = '#189150';
 
-/** Texto que entra con volumen elástico tipo arcilla 3D y se asienta con relieve suave. */
+/** Texto que entra con volumen elástico tipo arcilla 3D usando solo transform y opacity en GPU. */
 export function misreg(el, opts = {}) {
-  const { dur = 0.9, k = 1, delay = 0 } = opts;
+  const { dur = 0.75, k = 1, delay = 0 } = opts;
   const tl = gsap.timeline({ delay });
   tl.set(el, { autoAlpha: 1 });
   tl.fromTo(el, {
-    textShadow: `0 ${14 * k}px ${28 * k}px rgba(225,29,56,0.45), 0 ${-8 * k}px ${18 * k}px rgba(24,145,80,0.40)`,
-    y: 22 * k, scale: 0.94, opacity: 0,
+    y: 20 * k, scale: 0.94, opacity: 0, force3D: true,
   }, {
-    textShadow: `0 ${2 * k}px 0 rgba(255,255,255,0.45), 0 ${5 * k}px 0 rgba(2,43,80,0.16), 0 ${12 * k}px ${22 * k}px rgba(0,10,26,0.20)`,
-    y: 0, scale: 1, opacity: 1, duration: dur, ease: 'back.out(1.6)',
+    y: 0, scale: 1, opacity: 1, duration: dur, ease: 'back.out(1.6)', force3D: true,
   });
   return tl;
 }
@@ -295,19 +293,19 @@ export function misreg(el, opts = {}) {
 export function stamp(el, opts = {}) {
   const { rot = -12, quake = 0.5, sound = true } = opts;
   const tl = gsap.timeline();
-  tl.fromTo(el, { autoAlpha: 0, scale: 2.6, rotation: rot - 18 }, { autoAlpha: 1, scale: 1, rotation: rot, duration: 0.28, ease: 'power4.in' });
+  tl.fromTo(el, { autoAlpha: 0, scale: 2.4, rotation: rot - 16, force3D: true }, { autoAlpha: 1, scale: 1, rotation: rot, duration: 0.26, ease: 'power4.in', force3D: true });
   tl.call(() => { if (sound) sfx.stamp(); if (quake) shake(quake); inkSplat(el); });
-  tl.fromTo(el, { scale: 0.94 }, { scale: 1, duration: 0.35, ease: 'back.out(3)' });
+  tl.fromTo(el, { scale: 0.94 }, { scale: 1, duration: 0.32, ease: 'back.out(3)', force3D: true });
   return tl;
 }
 
 /** Rotulador que escribe: barrido de izquierda a derecha con sonido. */
 export function scrawl(el, opts = {}) {
-  const { dur = 0.9, sound = true } = opts;
+  const { dur = 0.85, sound = true } = opts;
   const tl = gsap.timeline();
   tl.set(el, { autoAlpha: 1 });
   if (sound) tl.call(() => sfx.scribble(dur));
-  tl.fromTo(el, { clipPath: 'inset(-20% 100% -20% -2%)' }, { clipPath: 'inset(-20% -2% -20% -2%)', duration: dur, ease: 'power1.inOut' }, 0);
+  tl.fromTo(el, { clipPath: 'inset(-20% 100% -20% -2%)' }, { clipPath: 'inset(-20% -2% -20% -2%)', duration: dur, ease: 'power1.inOut', clearProps: 'clipPath' }, 0);
   return tl;
 }
 
@@ -326,51 +324,51 @@ export function tapeOn(el, opts = {}) {
   const { rot = (Math.random() - 0.5) * 8 } = opts;
   const tl = gsap.timeline();
   tl.call(() => sfx.tape());
-  tl.fromTo(el, { autoAlpha: 0, y: -80, rotation: rot * 3, scale: 1.08 }, { autoAlpha: 1, y: 0, rotation: rot, scale: 1, duration: 0.55, ease: 'back.out(1.6)' });
+  tl.fromTo(el, { autoAlpha: 0, y: -70, rotation: rot * 2.5, scale: 1.06, force3D: true }, { autoAlpha: 1, y: 0, rotation: rot, scale: 1, duration: 0.5, ease: 'back.out(1.6)', force3D: true });
   return tl;
 }
 
-/** Bloque que "sale de la impresora": entra con las tintas saturadas y desplazadas y se asienta. */
+/** Bloque que entra suavemente en escena (sin filtros de desenfoque costosos en GPU). */
 export function printIn(el, opts = {}) {
-  const { dur = 0.8, from = 'left' } = opts;
+  const { dur = 0.65, from = 'left' } = opts;
   const tl = gsap.timeline();
   tl.call(() => sfx.roller(0.45));
-  tl.fromTo(el, { autoAlpha: 0, x: from === 'left' ? -60 : 60, y: 24, rotation: from === 'left' ? -2 : 2, filter: 'saturate(3) hue-rotate(-25deg) blur(3px)' },
-    { autoAlpha: 1, x: 0, y: 0, rotation: 0, filter: 'saturate(1) hue-rotate(0deg) blur(0px)', duration: dur, ease: 'power3.out' }, 0);
+  tl.fromTo(el, { autoAlpha: 0, x: from === 'left' ? -55 : 55, y: 20, rotation: from === 'left' ? -1.5 : 1.5, force3D: true },
+    { autoAlpha: 1, x: 0, y: 0, rotation: 0, duration: dur, ease: 'power3.out', force3D: true }, 0);
   return tl;
 }
 
-/** Gotas de tinta que salpican alrededor de un sello al golpear. */
+/** Gotas de arcilla que salpican alrededor de un sello al golpear (ligeras). */
 export function inkSplat(el, colors) {
   if (sfx.silent || !el.parentNode) return;
   const host = el.parentNode;
   const c = colors || [getComputedStyle(el).color, '#e11d38', '#189150', '#140ec8'];
   const x = el.offsetLeft + el.offsetWidth / 2, y = el.offsetTop + el.offsetHeight / 2;
-  for (let i = 0; i < 16; i++) {
+  for (let i = 0; i < 8; i++) {
     const d = document.createElement('i');
-    const r = gsap.utils.random(5, 16);
-    const a = Math.random() * Math.PI * 2;
-    const dist = Math.max(el.offsetWidth, el.offsetHeight) * gsap.utils.random(0.45, 0.75);
+    const r = gsap.utils.random(6, 14);
+    const a = (i / 8) * Math.PI * 2 + Math.random() * 0.4;
+    const dist = Math.max(el.offsetWidth, el.offsetHeight) * gsap.utils.random(0.45, 0.7);
     d.className = 'splat';
     d.style.cssText = `left:${x}px;top:${y}px;width:${r}px;height:${r}px;background:${gsap.utils.random(c)}`;
     host.appendChild(d);
-    gsap.fromTo(d, { x: 0, y: 0, scale: 0 }, { x: Math.cos(a) * dist, y: Math.sin(a) * dist * 0.6, scale: 1, duration: 0.25, ease: 'power3.out' });
-    gsap.to(d, { opacity: 0, duration: 0.6, delay: 1.4, onComplete: () => d.remove() });
+    gsap.fromTo(d, { x: 0, y: 0, scale: 0, force3D: true }, { x: Math.cos(a) * dist, y: Math.sin(a) * dist * 0.6, scale: 1, duration: 0.22, ease: 'power3.out', force3D: true });
+    gsap.to(d, { opacity: 0, duration: 0.4, delay: 1.1, onComplete: () => d.remove() });
   }
 }
 
-/** Confeti en cuentas de arcilla con la paleta Puleva que cae desde arriba. */
-export function confetti(host, n = 140) {
+/** Confeti en cuentas de arcilla con la paleta Puleva que cae desde arriba (optimizado). */
+export function confetti(host, n = 55) {
   const tl = gsap.timeline();
   if (sfx.silent) return tl;
   const colors = ['#e11d38', '#189150', '#140ec8', '#022b50', '#f2f2f2'];
   for (let i = 0; i < n; i++) {
     const d = document.createElement('i');
-    const w = gsap.utils.random(14, 34), h = w * gsap.utils.random(0.35, 1);
+    const w = gsap.utils.random(14, 30), h = w * gsap.utils.random(0.45, 1);
     d.className = 'confetti';
-    d.style.cssText = `left:${gsap.utils.random(-50, 1950)}px;top:-60px;width:${w}px;height:${h}px;background:${gsap.utils.random(colors)};border-radius:${Math.random() < 0.4 ? '50%' : '2px'}`;
+    d.style.cssText = `left:${gsap.utils.random(-20, 1920)}px;top:-50px;width:${w}px;height:${h}px;background:${gsap.utils.random(colors)};border-radius:${Math.random() < 0.45 ? '50%' : '8px'}`;
     host.appendChild(d);
-    tl.to(d, { y: gsap.utils.random(1150, 1300), x: `+=${gsap.utils.random(-200, 200)}`, rotation: gsap.utils.random(-720, 720), rotationX: gsap.utils.random(-360, 360), duration: gsap.utils.random(2.2, 4.2), ease: 'power1.in', delay: Math.random() * 1.2 }, 0);
+    tl.to(d, { y: gsap.utils.random(1120, 1240), x: `+=${gsap.utils.random(-160, 160)}`, rotation: gsap.utils.random(-360, 360), duration: gsap.utils.random(2.0, 3.6), ease: 'power1.in', delay: Math.random() * 1.0, force3D: true }, 0);
   }
   return tl;
 }

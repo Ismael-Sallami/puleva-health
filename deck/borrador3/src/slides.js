@@ -158,7 +158,7 @@ export const SLIDES = [
           .add(pop($(el, '#bc'), { freq: 380 }), 1.9);
       },
       (el) => tl()
-        .to([$(el, '#pa'), $(el, '#pc')], { scale: 0.96, filter: 'saturate(.5) brightness(.85)', duration: 0.5 })
+        .to([$(el, '#pa'), $(el, '#pc')], { scale: 0.96, opacity: 0.55, duration: 0.45, force3D: true })
         .add(stamp($(el, '#q'), { rot: -3, quake: 0.6 }), 0.1),
     ],
   },
