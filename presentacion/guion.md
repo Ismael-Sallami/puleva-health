@@ -1,6 +1,6 @@
 # Guion de la final · Puleva Health
 
-**Duración objetivo:** 9:00 como máximo (1 min de margen sobre los 10, porque de pie siempre se tarda más) · ~1.050 palabras habladas · 3 ponentes que rotan (Ismael, Jesús y David). Quién dice cada frase, al detalle, en `reparto.md`. Las diapositivas son las de `deck/borrador3`.
+**Duración objetivo:** 9:00 como máximo (1 min de margen sobre los 10, porque de pie siempre se tarda más) · ~1.050 palabras habladas · 3 ponentes que rotan (Ismael, Jesús y David). En cada diapositiva habla una sola persona; nunca hablamos a la vez. Quién dice cada frase, al detalle, en `reparto.md`. Las diapositivas son las de `deck/borrador3`.
 
 **Idea central:** no repasamos el informe, **vendemos**. Y para que Puleva Health salga adelante hay que convencer a **tres compradores**: el consumidor, el supermercado y Lactalis. El hilo conductor es una familia (Álex y Carmen) que abre y cierra la presentación. Todas las cifras salen de estudios de mercado recientes citados en el informe (NielsenIQ 2026, Alimarket 2026, IQVIA 2026, Kantar 2025, estudio ANIBES) y cada diapositiva lleva su fuente en la esquina.
 
@@ -11,16 +11,16 @@
 | 3 | El lineal | 1:05–1:40 | Jesús | Marketing |
 | 4 | Tres frenos | 1:40–2:10 | Jesús | Marketing |
 | 5 | La idea | 2:10–2:50 | David | Marketing |
-| 6 | Daily · Carmen | 2:50–3:30 | Jesús | Marketing |
+| 6 | Daily · Carmen | 2:50–3:30 | David → Jesús → Ismael | Marketing |
 | 7 | ¿Por qué estos tres? (figura 1) | 3:30–4:10 | Ismael | Marketing / I+D |
-| 8 | Active · Álex + demo Crea-Snap | 4:10–4:55 | David | I+D |
-| 9 | ClearPro | 4:55–5:30 | David | Marketing / I+D |
-| 10 | Por qué Puleva | 5:30–6:05 | Ismael | Estrategia |
-| 11 | Convencer al súper | 6:05–6:45 | Jesús | Comercial |
-| 12 | Lactalis · 1 M€ en medios | 6:45–7:20 | Ismael | Comercial / marketing |
-| 13 | Lactalis · los números | 7:20–8:20 | David | Business case |
-| 14 | Un martes por la mañana | 8:20–9:00 | Los tres | — |
-| A1–A3 | Apéndice (solo si preguntan) | — | David | Business case |
+| 8 | Active · Álex + demo Crea-Snap | 4:10–4:55 | Ismael | I+D |
+| 9 | ClearPro | 4:55–5:30 | Jesús | Marketing / I+D |
+| 10 | Por qué Puleva | 5:30–6:05 | Jesús | Estrategia |
+| 11 | Convencer al súper | 6:05–6:45 | David | Comercial |
+| 12 | Lactalis · 1 M€ en medios | 6:45–7:20 | David | Comercial / marketing |
+| 13 | Lactalis · los números | 7:20–8:20 | Ismael | Business case |
+| 14 | Un martes por la mañana | 8:20–9:00 | Jesús | — |
+| A1–A3 | Apéndice (solo si preguntan) | — | Jesús | Business case |
 
 ---
 
@@ -60,7 +60,7 @@
 
 > Así que nos preguntamos: ¿y si el complemento no pareciera ni medicina ni cosa de gimnasio? ¿Y si ya estuviera en tu nevera, de una marca en la que confías, y te lo tomaras en diez segundos?
 
-*[Silencio de 2 segundos. Se destapan los cinco botes.]*
+*[Silencio de 2 segundos. Jesús destapa los cinco botes; David sigue hablando.]*
 
 > Esto es **Puleva Health. Salud que se bebe.**
 >
@@ -68,11 +68,18 @@
 
 ---
 
-## 6 · Daily · para Carmen · 2:50–3:30 · Jesús
+## 6 · Daily · para Carmen · 2:50–3:30 · David → Jesús → Ismael
 
-*[Coger cada bote al nombrarlo.]*
+*[Cada uno coge su bote al nombrarlo. David sigue hablando desde La idea.]*
 
-> Volvamos con Carmen. *[Now]* Su shot es **Now**: magnesio, teanina y vitaminas B6 y B12, que ayudan a disminuir el cansancio. El shot que sustituye al segundo café. *[Care]* **Care**, la piel desde dentro, con vitaminas C y E y zinc. *[Shield]* Y **Shield**, la defensa natural de la leche: lactoferrina, zinc y vitaminas C y D. Packs de seis en la nevera de lácteos, junto a la leche que ya compra, a poco más de un euro el shot: menos que un café en la barra.
+**David**
+> Volvamos con Carmen. *[Now]* Su shot es **Now**: magnesio, teanina y vitaminas B6 y B12, que ayudan a disminuir el cansancio. El shot que sustituye al segundo café.
+
+**Jesús**
+> *[Care]* **Care**, la piel desde dentro, con vitaminas C y E y zinc.
+
+**Ismael**
+> *[Shield]* Y **Shield**, la defensa natural de la leche: lactoferrina, zinc y vitaminas C y D. Packs de seis en la nevera de lácteos, junto a la leche que ya compra, a poco más de un euro el shot: menos que un café en la barra.
 
 ## 7 · ¿Por qué estos tres? · 3:30–4:10 · Ismael
 
@@ -84,15 +91,15 @@
 
 ---
 
-## 8 · Active · para Álex + demo · 4:10–4:55 · David
+## 8 · Active · para Álex + demo · 4:10–4:55 · Ismael
 
 > Ahora Álex. *[Crea-Snap]* La creatina tiene un problema: disuelta en agua se degrada y deja de servir. Por eso casi no existe creatina lista para beber. Nuestra solución es guardarla en el tapón.
 
-*[**DEMO**, máximo 15 s: quitar la pinza, pulsar el tapón y agitar. En pantalla, el plano 3D hace lo mismo.]*
+*[**DEMO**, máximo 15 s: Ismael quita la pinza, pulsa el tapón y agita. Jesús pulsa → para que el plano 3D haga lo mismo.]*
 
 > Pulsas, agitas y bebes. Tres gramos activos, siempre. *Pulsa, agita, entrena.*
 
-## 9 · ClearPro · 4:55–5:30 · David
+## 9 · ClearPro · 4:55–5:30 · Jesús
 
 > Y después de entrenar, **ClearPro**: 20 gramos de proteína con textura de zumo, hecha con suero de Lactalis Ingredients, a 2,19 €: más barata que un YoPro y que la proteína clear online.
 >
@@ -100,7 +107,7 @@
 
 ---
 
-## 10 · Por qué Puleva · 5:30–6:05 · Ismael
+## 10 · Por qué Puleva · 5:30–6:05 · Jesús
 
 *[Pantalla: mapa de posicionamiento.]*
 
@@ -110,7 +117,7 @@
 
 ---
 
-## 11 · Convencer al supermercado · 6:05–6:45 · Jesús
+## 11 · Convencer al supermercado · 6:05–6:45 · David
 
 > Para llegar a Carmen y a Álex, antes hay que convencer al supermercado. Y le damos lo que hoy no tiene: **rotación**, porque Daily se recompra cada semana; **tráfico**, con un millón al año en televisión y redes; **un 30 % de margen**, y una categoría que hoy se le escapa a internet.
 >
@@ -118,11 +125,11 @@
 
 ---
 
-## 12 · Lactalis · 1 M€ para que nos vean · 6:45–7:20 · Ismael
+## 12 · Lactalis · 1 M€ para que nos vean · 6:45–7:20 · David
 
 > Y por último, convencer a Lactalis. Invertimos 3 millones al año: dos en comercial y uno en medios. Con ese millón buscamos dos caras para los dos públicos que definimos. Para Daily, adultos de 30 a 55 años y familias, en televisión, un presentador **como** Roberto Leal. Para Now y Active, jóvenes de 18 a 35 años, en redes, una creadora **como** SofiG, más microinfluencers de deporte. Todo, sujeto a negociación.
 
-## 13 · Lactalis · los números · 7:20–8:20 · David
+## 13 · Lactalis · los números · 7:20–8:20 · Ismael
 
 *[Pantalla: hipótesis, venta neta y EBITDA.]*
 
@@ -134,7 +141,7 @@
 
 ---
 
-## 14 · Un martes por la mañana · 8:20–9:00 · Los tres
+## 14 · Un martes por la mañana · 8:20–9:00 · Jesús
 
 *[Los cinco botes en fila sobre la mesa.]*
 
@@ -144,7 +151,7 @@
 
 ---
 
-## Apéndice · solo si preguntan · David
+## Apéndice · solo si preguntan · Jesús
 
 Después del Gracias hay tres páginas para las preguntas:
 
@@ -168,7 +175,7 @@ Se salta a ellas desde la vista de ponente (`P`).
 ## Checklist antes de la final
 
 - [ ] Ensayar con cronómetro al menos 3 veces completas: **8:30 leyendo**, para llegar a **9:00 de pie**. Hitos: 2:10, 4:55 y 7:20 (ver `reparto.md`).
-- [ ] Demo Crea-Snap probada 10+ veces. Si el PLA no es estanco, demo solo mecánica (sin líquido). Plan B: el plano 3D de la diapositiva 8.
+- [ ] Demo Crea-Snap probada 10+ veces por Ismael. Si el PLA no es estanco, demo solo mecánica (sin líquido). Plan B: el plano 3D de la diapositiva 8.
 - [ ] Etiquetas impresas pegadas en los botes (renders de producto).
 - [ ] Presentación compilada y probada **sin internet** en el portátil (`npm run build && npm run preview`), con PDF de respaldo.
 - [ ] Vista de ponente (`P`) abierta en el portátil: notas, cronómetro (se pone rojo a las 9:00) y salto al apéndice.
