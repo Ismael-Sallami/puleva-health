@@ -229,13 +229,13 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
   {
     id: 'frenos', theme: 'paper', title: 'Tres frenos', speaker: 'Jesús · un freno cada uno', time: '1:55–2:30',
     notes: `"El consumidor choca con tres frenos."
-→ "La pastilla parece medicina, y al 37 % de los adultos le cuesta tragarla."
+→ "La pastilla parece medicina, y a mucha gente le cuesta tragarla."
 → "El polvo es de gimnasio: bote, báscula, coctelera."
 → "Y en el pasillo no hay nadie a quien preguntar."
 → "Mientras tanto, más del 70 % de los españoles no llega a la ingesta recomendada de magnesio, zinc o vitamina E. La necesidad existe. Lo que falla es cómo la ofrecemos."`,
     html: `${DEFS}
       <div class="mega abs h" id="h" style="left:90px;top:66px;font-size:140px">TRES FRENOS.</div>
-      ${[['LA PASTILLA', '= MEDICINA', 'oct-pink', '<b class="big" id="p37">0 %</b> de los adultos tiene dificultad para tragarla'],
+      ${[['LA PASTILLA', '= MEDICINA', 'oct-pink', '<b class="big big-txt">MUCHA GENTE</b> tiene dificultad para tragarla'],
     ['EL POLVO', '= GIMNASIO', 'oct-blue', '<b class="big">1 KG</b> bote · báscula · coctelera'],
     ['EL PASILLO', '= NADIE', 'oct-ink', '<b class="big">0</b> personas a quien preguntar']].map(([a, b, c, cap], i) => `
         <div class="brake abs" style="left:${110 + i * 590}px;top:250px">
@@ -255,7 +255,6 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
           .fromTo($$(b, '.skid path'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.5, ease: 'power2.out' })
           .add(stamp($(b, '.oct'), { rot: [-6, 4, -3][i], quake: 0.9 }), 0.35)
           .add(reveal($(b, '.brake-cap')), 0.75);
-        if (i === 0) t.add(countUp($(el, '#p37'), 37, { suffix: ' %', dur: 0.9 }), 0.75);
         return t;
       }),
       (el) => tl().add(reveal($(el, '#need'))).add(scrawl($(el, '#fin'), { dur: 1.1 }), 0.6),
@@ -476,7 +475,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
     notes: `"Para llegar a Carmen y a Álex, antes hay que convencer al supermercado. Y le damos lo que hoy no tiene."
 → (ticket) "Rotación, porque Daily se recompra cada semana. Tráfico, con un millón al año en televisión y redes, con embajadores como Roberto Leal y SofiG. Un 30 % de margen. Y una categoría que hoy se le escapa a internet."
 → (plano) "Estaremos en tres puntos de la tienda: la nevera de lácteos, un módulo en el pasillo de suplementos y neveras de caja para la compra por impulso, además de neveras en gimnasios."
-→ (sellos) "Farmacia y e-commerce, descartados a propósito: no somos un medicamento, y un líquido refrigerado no se manda por paquetería."
+→ (sellos) "Farmacia y e-commerce, descartados a propósito."  (Si preguntan: no somos un medicamento, y un líquido refrigerado no se manda por paquetería.)
 → (calendario) "Daily se lanza en septiembre, cuando sube la preocupación por las defensas. Active, en marzo, con la temporada de deporte."  (sello: SÚPER ✓)`,
     html: `
       <div class="mega abs h" id="h" style="left:110px;top:60px;font-size:110px">CONVENCER <span style="color:var(--pink)">AL SÚPER.</span></div>
@@ -546,7 +545,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
    (recuadro de hipótesis) "Partimos del mercado real: NielsenIQ, 119 millones en súper e híper, creciendo un 13, 12 y 10 %. Una cuota que pasa del 4 al 8 y al 13 %. La cadena se queda un 30 %. Puleva gana un 15 % en Daily y un 10 % en Active, lo estándar en el sector: Danone tiene un 8,5 % operativo en lácteos. E invertimos 3 millones al año: dos en comercial y uno en medios."
 → (barras: debajo de cada año, mercado × cuota) "Con eso, la venta neta llega a 15,1 millones en el año 3…"
 → (línea) "…el EBITDA es positivo ese mismo año y el equilibrio mensual llega en el mes 29."
-→ (pósit amarillo) "No os vamos a vender un pelotazo. El margen es ajustado, como en todo el sector lácteo, y la inversión se recupera hacia el año 7, lo habitual al crear una categoría nueva en gran consumo."
+→ (pósit amarillo) "No os vamos a vender un pelotazo. El margen es ajustado, como en todo el sector lácteo, y la inversión se recupera hacia el año 7."
 → (pósit rosa) "Y sabemos qué tiene que salir bien: fabricar Daily en planta propia. Con maquilador no es viable. Y con un 15 % de cuota, el EBITDA del año 3 se triplica."  (sello: LACTALIS ✓)
 Si preguntan: apéndice A1 (figura 7), A2 (tabla 7 e hipótesis) y A3 (sensibilidad).`,
     html: `${DEFS}
@@ -700,14 +699,14 @@ const SPK = {
   lineal: ['Jesús (+ David remata)', '1:05–1:40'],
   frenos: ['Jesús · un freno cada uno', '1:40–2:10'],
   idea: ['David · preguntas a tres voces + coro', '2:10–2:50'],
-  daily: ['Jesús (+ Ismael remata)', '2:50–3:35'],
-  mercado: ['Ismael', '3:35–4:10'],
-  active: ['David · demo (Jesús pulsa →)', '4:10–5:00'],
-  clearpro: ['David (+ Jesús = Carmen)', '5:00–5:30'],
+  daily: ['Jesús (+ Ismael remata)', '2:50–3:30'],
+  mercado: ['Ismael', '3:30–4:10'],
+  active: ['David · demo (Jesús pulsa →)', '4:10–4:55'],
+  clearpro: ['David (+ Jesús = Carmen)', '4:55–5:30'],
   porque: ['Ismael · una clave cada uno', '5:30–6:05'],
-  super: ['Jesús · Ismael = comprador', '6:05–6:50'],
-  embajadores: ['Ismael', '6:50–7:25'],
-  lactalis: ['David (+ Ismael mes 29)', '7:25–8:20'],
+  super: ['Jesús · Ismael = comprador', '6:05–6:45'],
+  embajadores: ['Ismael', '6:45–7:20'],
+  lactalis: ['David (+ Ismael mes 29)', '7:20–8:20'],
   martes: ['Los tres · coro final', '8:20–9:00'],
 };
 SLIDES.forEach((s) => { if (SPK[s.id]) [s.speaker, s.time] = SPK[s.id]; });

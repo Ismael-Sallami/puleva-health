@@ -54,8 +54,9 @@ export const MERCADO_SLIDE = {
   id: 'mercado', theme: 'graph', title: '¿Por qué estos tres? (figura 1)', speaker: 'Jesús', time: '4:15–4:50', buyers: [true, 0],
   notes: `"¿Por qué estos tres y no otros? No los elegimos a ojo."
 → (se dibujan las barras) "Esta es la venta de complementos en súper e híper por segmento, con datos de NielsenIQ de 2026."
-→ (se pintan de verde) "En verde, lo que cubre Daily: colágeno y cabello para Care, vitamina C con zinc y própolis para Shield, magnesio y memoria para Now. Suman 33 millones, el 28 % del mercado. Y el magnesio crece un 27 %."
-→ (ciencia) "Y la ciencia lo respalda: según el estudio ANIBES, el 72 % de los adultos no llega al magnesio, el 83 % al zinc y el 80 % a la vitamina E. Y en farmacia el magnesio ya mueve 48 millones y crece un 35 %: la demanda existe."`,
+→ (se pintan de verde) "En verde, lo que cubre Daily: colágeno y cabello para Care, vitamina C con zinc y própolis para Shield, magnesio y memoria para Now. Suman 33 millones, el 28 % del mercado."
+→ (ciencia) "Y la ciencia lo respalda: según el estudio ANIBES, el 72 % de los adultos no llega al magnesio, el 83 % al zinc y el 80 % a la vitamina E."
+   (opcional, si sobra tiempo) "En farmacia, el magnesio ya mueve 48 millones y crece un 35 %."`,
   html: `${DEFS}
     <div class="marker abs h" id="k" style="left:110px;top:56px;font-size:46px;color:var(--pink)">No los elegimos a ojo.</div>
     <div class="mega abs h" id="h" style="left:110px;top:112px;font-size:100px">¿POR QUÉ <span style="color:var(--blue)">ESTOS TRES?</span></div>
@@ -125,9 +126,9 @@ const PRICES = [
 export const CLEARPRO_SLIDE = {
   id: 'clearpro', theme: 'paper', title: 'ClearPro · proteína clear', speaker: 'David', time: '5:50–6:20', buyers: [true, 0],
   notes: `→ "Y después de entrenar, ClearPro: 20 gramos de proteína con textura de zumo, hecha con suero de Lactalis Ingredients…"
-→ (precios) "…a 2,19 €: más barata que un YoPro (2,69 € en Carrefour) y que la proteína clear que hoy solo se compra online, como Myprotein (unos 3 €). La marca blanca es más barata, pero no es clear ni es Puleva."
-   OJO: el informe decía "menos de la mitad que un batido RTD de referencia (4 €)"; con precios reales de nov. 2026 esa frase no se sostiene, no la digáis.
-→ "Y aquí vuelve la madre de Álex. Lo que le daba miedo no era la creatina, era un bote de polvo de una marca que no conocía. Cuando lo que ve es un botellín de Puleva junto a la leche, la conversación cambia."  (sello: CONSUMIDOR ✓)`,
+→ (precios) "…a 2,19 €: más barata que un YoPro y que la proteína clear online."
+   No digáis "menos de la mitad que un batido": con precios reales de nov. 2026 no se sostiene.
+→ "Y aquí vuelve la madre de Álex. Lo que le daba miedo era un bote de polvo de una marca que no conocía. Cuando ve un botellín de Puleva junto a la leche, la conversación cambia."  (sello: CONSUMIDOR ✓)`,
   html: `${DEFS}
     <div class="cpx-disc abs h" id="disc"></div>
     <div class="cpx-badge abs h" id="badge"><b id="g20">0</b><span>g de<br>proteína</span></div>

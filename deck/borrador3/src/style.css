@@ -1228,3 +1228,4 @@ body.presenter { background: var(--paper); color: var(--ink); font-family: var(-
 .src-note b { display: inline-block; margin-right: 10px; padding: 2px 9px; border-radius: 999px; font-size: 12px; letter-spacing: .14em; color: #fff; background: var(--vogue); }
 .ink-blue .src-note { color: rgba(242, 242, 242, 0.8); }
 
+.brake-cap .big-txt { white-space: nowrap; font-size: 62px; }

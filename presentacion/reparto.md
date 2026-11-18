@@ -8,9 +8,9 @@
 
 | Persona | Diapositivas que lleva | Tiempo | Además… |
 |---|---|---|---|
-| **Ismael** · historia y marca | 1 Familia · 2 Nevera · 7 ¿Por qué estos tres? · 10 Por qué Puleva · 12 Embajadores | ~2:50 | Abre. Es el **comprador escéptico** del súper en la 11 y dice el **mes 29** en la 13 |
-| **Jesús** · problema, Daily y súper | 3 El lineal · 4 Tres frenos · 6 Daily · 11 Súper | ~2:35 | Es la **voz de Carmen**. Destapa los botes en la 5 |
-| **David** · idea, Active y negocio | 5 La idea · 8 Active + demo · 9 ClearPro · 13 Lactalis | ~2:55 | Es la **voz de Álex**. Hace la **demo** del Crea-Snap |
+| **Ismael** · historia y marca | 1 Familia · 2 Nevera · 7 ¿Por qué estos tres? · 10 Por qué Puleva · 12 Embajadores | ~2:55 | Abre. Es el **comprador escéptico** del súper en la 11 y dice el **mes 29** en la 13 |
+| **Jesús** · problema, Daily y súper | 3 El lineal · 4 Tres frenos · 6 Daily · 11 Súper | ~2:25 | Es la **voz de Carmen**. Destapa los botes en la 5 |
+| **David** · idea, Active y negocio | 5 La idea · 8 Active + demo · 9 ClearPro · 13 Lactalis | ~3:00 | Es la **voz de Álex**. Hace la **demo** del Crea-Snap |
 | **Los tres** | 14 Un martes (cierre) | ~0:40 | Una frase cada uno y **coro final** |
 
 **Orden de los relevos:** Ismael (1–2) → Jesús (3–4) → David (5) → Jesús (6) → Ismael (7) → David (8–9) → Ismael (10) → Jesús (11) → Ismael (12) → David (13) → los tres (14).
@@ -22,18 +22,18 @@
 | 3 | El lineal | Jesús | 1:05 | 0:35 |
 | 4 | Tres frenos | Jesús | 1:40 | 0:30 |
 | 5 | La idea | David | 2:10 | 0:40 |
-| 6 | Daily · Carmen | Jesús | 2:50 | 0:45 |
-| 7 | ¿Por qué estos tres? | Ismael | 3:35 | 0:35 |
-| 8 | Active · Álex + demo | David | 4:10 | 0:50 |
-| 9 | ClearPro | David | 5:00 | 0:30 |
+| 6 | Daily · Carmen | Jesús | 2:50 | 0:40 |
+| 7 | ¿Por qué estos tres? | Ismael | 3:30 | 0:40 |
+| 8 | Active · Álex + demo | David | 4:10 | 0:45 |
+| 9 | ClearPro | David | 4:55 | 0:35 |
 | 10 | Por qué Puleva | Ismael | 5:30 | 0:35 |
-| 11 | Convencer al súper | Jesús | 6:05 | 0:45 |
-| 12 | Lactalis · 1 M€ en medios | Ismael | 6:50 | 0:35 |
-| 13 | Lactalis · los números | David | 7:25 | 0:55 |
+| 11 | Convencer al súper | Jesús | 6:05 | 0:40 |
+| 12 | Lactalis · 1 M€ en medios | Ismael | 6:45 | 0:35 |
+| 13 | Lactalis · los números | David | 7:20 | 1:00 |
 | 14 | Un martes por la mañana | Los tres | 8:20 | 0:40 |
 | | **Fin** | | **9:00** | |
 
-Hitos para mirar el cronómetro de la vista de ponente: **2:10** al empezar La idea, **5:00** al empezar ClearPro y **7:25** al empezar los números de Lactalis. Si vais más de 20 s tarde en un hito, recortad.
+Hitos para mirar el cronómetro de la vista de ponente: **2:10** al empezar La idea, **4:55** al empezar ClearPro y **7:20** al empezar los números de Lactalis. Si vais más de 20 s tarde en un hito, recortad.
 
 **Mando:** lo lleva quien esté al frente y se lo da al siguiente en cada relevo. Si preferís que lo lleve uno solo, que sea Ismael desde el portátil, con la vista de ponente (`P`), que muestra quién habla y cuánto dura cada página.
 
@@ -61,7 +61,7 @@ En pantalla mientras subís. Ismael pulsa → (se imprime la portada) justo ante
 
 ### 4 · Tres frenos · 1:40–2:10 · **JESÚS**
 - **Jesús**: *"El consumidor choca con tres frenos."* Después, un freno por voz:
-  - **Jesús**: la pastilla parece medicina; al 37 % le cuesta tragarla.
+  - **Jesús**: la pastilla parece medicina; a mucha gente le cuesta tragarla.
   - **David**: el polvo es de gimnasio: bote, báscula, coctelera.
   - **Ismael**: en el pasillo no hay nadie a quien preguntar.
 - **Jesús** cierra: más del 70 % no llega al magnesio, al zinc o a la vitamina E. *"La necesidad existe. Lo que falla es cómo la ofrecemos."*
@@ -73,7 +73,7 @@ En pantalla mientras subís. Ismael pulsa → (se imprime la portada) justo ante
 - **David**: monodosis líquidas; no son medicamentos y solo llevan claims de la EFSA. Dos líneas: **Daily**, para cuidarse cada día, y **Active**, para rendir.
 - (Opcional) **Ismael**: *"Y para que salga adelante hay que convencer a tres: al consumidor, al súper y a Lactalis."*
 
-### 6 · Daily · para Carmen · 2:50–3:35 · **JESÚS**
+### 6 · Daily · para Carmen · 2:50–3:30 · **JESÚS**
 - **Jesús** coge cada bote al nombrarlo:
   - **Now**: magnesio, teanina, B6 y B12. El shot que sustituye al segundo café.
   - **Care**: la piel desde dentro.
@@ -81,17 +81,16 @@ En pantalla mientras subís. Ismael pulsa → (se imprime la portada) justo ante
 - Packs de seis en la nevera de lácteos, a poco más de un euro el shot.
 - **Ismael** remata: *"Menos que un café en la barra."* (→ sello)
 
-### 7 · ¿Por qué estos tres? · 3:35–4:10 · **ISMAEL**
+### 7 · ¿Por qué estos tres? · 3:30–4:10 · **ISMAEL**
 - **Ismael**: *"No los elegimos a ojo."* (→ se dibujan las barras) Ventas por segmento en súper e híper, datos de NielsenIQ de 2026.
-- (→ se pintan de verde) Lo que cubre Daily: colágeno y cabello para Care, vitamina C con zinc y própolis para Shield, magnesio y memoria para Now. **33 millones, el 28 % del mercado.** Y el magnesio crece un 27 %.
-- (→ ciencia) Según el estudio ANIBES, el 72 % no llega al magnesio, el 83 % al zinc y el 80 % a la vitamina E.
+- (→ se pintan de verde) Lo que cubre Daily: colágeno y cabello para Care, vitamina C con zinc y própolis para Shield, magnesio y memoria para Now. **33 millones, el 28 % del mercado.** - (→ ciencia) Según el estudio ANIBES, el 72 % no llega al magnesio, el 83 % al zinc y el 80 % a la vitamina E.
 - Si vais justos, la frase de IQVIA (48 M€ de magnesio en farmacia) se salta.
 
-### 8 · Active · para Álex + demo · 4:10–5:00 · **DAVID**
+### 8 · Active · para Álex + demo · 4:10–4:55 · **DAVID**
 - **David**: *"Ahora Álex."* La creatina disuelta se degrada; por eso casi no existe lista para beber. La solución: guardarla en el tapón (→ se despieza el plano 3D).
 - **DEMO** (máx. 15 s): David **quita la pinza, pulsa y agita**. **Jesús** pulsa → para que el plano haga lo mismo. David: *"Pulsas, agitas y bebes. Tres gramos activos, siempre."* → **Jesús**: *"Pulsa, agita, entrena."*
 
-### 9 · ClearPro · 5:00–5:30 · **DAVID**
+### 9 · ClearPro · 4:55–5:30 · **DAVID**
 - **David**: *"Y después de entrenar, ClearPro."* 20 g de proteína con textura de zumo y suero de Lactalis Ingredients.
 - (→ precios) A 2,19 €: más barata que un YoPro (2,69 €) y que la proteína clear que hoy solo se compra online (unos 3 €). **No digáis "menos de la mitad que un batido"**: con precios reales no se sostiene.
 - **Jesús**, como Carmen, cierra: lo que le daba miedo era un bote de polvo de una marca desconocida; con un botellín de Puleva junto a la leche *"la conversación cambia"*. Al decirlo, pone el Crea-Snap junto a la leche (→ sello CONSUMIDOR ✓).
@@ -103,20 +102,20 @@ En pantalla mientras subís. Ismael pulsa → (se imprime la portada) justo ante
   - **David**: **Ciencia láctea**: el suero de Lactalis Ingredients, la lactoferrina y el Instituto Puleva de Nutrición.
 - **Ismael** (mapa): los laboratorios venden pastillas, las marcas online polvo y la marca blanca compite en precio. El hueco está vacío (→ Puleva cae en la X).
 
-### 11 · Convencer al súper · 6:05–6:50 · **JESÚS**
+### 11 · Convencer al súper · 6:05–6:45 · **JESÚS**
 - **Jesús**: *"Para llegar a Carmen y a Álex, antes hay que convencer al supermercado."*
 - **Ismael**, con los brazos cruzados, como comprador: *"¿Y yo qué gano?"*
 - **Jesús** (→ se imprime el ticket): rotación, tráfico con 1 M€ en TV y redes, 30 % de margen y una categoría que hoy se le escapa a internet.
 - **Ismael**: *"¿Y dónde lo pongo?"* → **Jesús**: en la nevera de lácteos, el pasillo de suplementos y las cajas, más los gimnasios. Farmacia y e-commerce, descartados a propósito.
 - **Jesús**: Daily sale en septiembre. **David**: Active, en marzo (→ sello SÚPER ✓).
 
-### 12 · Lactalis · 1 M€ para que nos vean · 6:50–7:25 · **ISMAEL**
+### 12 · Lactalis · 1 M€ para que nos vean · 6:45–7:20 · **ISMAEL**
 - **Ismael**: *"Y por último, convencer a Lactalis. Invertimos 3 millones al año: dos en comercial y uno en medios. Empecemos por el de medios."*
 - (→ Roberto Leal) Dos caras para los dos públicos que definimos. Para Daily (adultos de 30 a 55 años y familias), en TV, un presentador **como** Roberto Leal.
 - (→ SofiG) Para Now y Active (jóvenes de 18 a 35), en redes, una creadora **como** SofiG, más microinfluencers de deporte. **Todo sujeto a negociación.**
 - (→ barra) 600.000 € en TV, 300.000 € en redes y 100.000 € en amplificación. Si los cachés suben, se recortan pases de TV, no las redes.
 
-### 13 · Lactalis · los números · 7:25–8:20 · **DAVID**
+### 13 · Lactalis · los números · 7:20–8:20 · **DAVID**
 - **David**, más despacio y serio: *"Con números prudentes."* (→ recuadro de hipótesis) El mercado de NielsenIQ crece un 13, 12 y 10 %; la cuota pasa del 4 al 8 y al 13 %; la cadena se queda un 30 %; Puleva gana un 15 % en Daily y un 10 % en Active, lo estándar en el sector.
 - (→ barras) **15,1 M€ de venta neta en el año 3.**
 - **Ismael**, cuando el calendario llega a 29: *"…y el equilibrio mensual llega en el mes 29."*
@@ -185,6 +184,6 @@ Si te cae una pregunta que no es tuya, pásala: *"Esto lo lleva David"*. Da imag
 ## Ensayo
 
 1. Lectura sentados con cronómetro: objetivo **8:30** leyendo, para llegar a **9:00** de pie.
-2. De pie, con atrezo y la presentación: practicar relevos, pasos al frente y el paso del mando. Comprobad los hitos 2:10, 5:00 y 7:25.
+2. De pie, con atrezo y la presentación: practicar relevos, pasos al frente y el paso del mando. Comprobad los hitos 2:10, 4:55 y 7:20.
 3. Demo del Crea-Snap 10 veces. Plan B: si falla, David dice *"Así funciona por dentro"* y se apoya en el plano 3D.
 4. Ensayo general con alguien que haga 2–3 preguntas de `preguntas.md`, usando el apéndice.
