@@ -26,7 +26,7 @@ async function deck() {
         <span class="by-t">Hay que convencer a</span>
         ${['Consumidor', 'Súper', 'Lactalis'].map((b, i) => `<div class="by" data-i="${i}"><i>${i + 1}</i>${b}<em class="by-stamp">SÍ</em></div>`).join('')}
       </div>
-      <div id="folio"><span>PULEVA HEALTH · FANZINE DE LA FINAL</span><b id="pg">01</b></div>
+      <div id="folio"><span>PULEVA HEALTH · SALUD QUE SE BEBE</span><b id="pg">01</b></div>
       <div id="roller"><div class="drum"></div><div class="ink-line"></div></div>
     </div>
     <div id="blackout"></div>
@@ -103,6 +103,7 @@ async function deck() {
     el.className = `slide ${S.theme || 'paper'}`;
     el.dataset.id = S.id;
     el.innerHTML = S.html;
+    if (S.src) el.insertAdjacentHTML('beforeend', `<div class="src-note"><b>DATOS</b>${S.src}</div>`);
     world.appendChild(el);
     state.slideEl = el;
     cur = null;
@@ -254,7 +255,7 @@ function presenter() {
     if (t0) {
       const s = Math.floor((Date.now() - t0) / 1000);
       $('#pt-timer').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
-      $('#pt-timer').classList.toggle('late', s > 570);
+      $('#pt-timer').classList.toggle('late', s > 540);
     }
   }, 500);
   if (bc) {

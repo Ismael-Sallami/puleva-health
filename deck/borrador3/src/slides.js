@@ -6,6 +6,7 @@ import {
 import { sfx } from './sfx.js';
 import { DEFS, alex, carmen, tub, clock, milk, fridge, bubble, hand } from './illus.js';
 import { createBlueprint } from './blueprint.js';
+import { MERCADO_SLIDE, CLEARPRO_SLIDE, EMBAJADORES_SLIDE, APENDICE_SLIDES } from './extra-slides.js';
 
 const tl = () => gsap.timeline();
 const IMG = (k) => `img/${k}.webp`; // renders de los botes de la web
@@ -88,7 +89,7 @@ export const SLIDES = [
       <div class="regmark" style="left:30px;top:30px"><svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="18" fill="none" stroke="#022b50" stroke-width="3"/><path d="M35 0V70M0 35H70" stroke="#022b50" stroke-width="3"/></svg></div><div class="regmark" style="right:30px;top:30px"><svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="18" fill="none" stroke="#022b50" stroke-width="3"/><path d="M35 0V70M0 35H70" stroke="#022b50" stroke-width="3"/></svg></div><div class="regmark" style="left:30px;bottom:30px"><svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="18" fill="none" stroke="#022b50" stroke-width="3"/><path d="M35 0V70M0 35H70" stroke="#022b50" stroke-width="3"/></svg></div><div class="regmark" style="right:30px;bottom:30px"><svg viewBox="0 0 70 70"><circle cx="35" cy="35" r="18" fill="none" stroke="#022b50" stroke-width="3"/><path d="M35 0V70M0 35H70" stroke="#022b50" stroke-width="3"/></svg></div>
       <div class="pass pass-y h"><div class="cv-sun"></div><div class="cv-band"></div></div>
       <div class="pass pass-p h"><div class="cv-moon"></div><div class="cv-slogan">SALUD QUE SE BEBE.</div></div>
-      <div class="pass pass-b h"><div class="cv-kick">FANZINE DE LA FINAL · Nº 1</div><div class="cv-title">PULEVA<br>HEALTH</div><div class="cv-foot">IV HACKATHON UGR × LACTALIS PULEVA · GRUPO 6</div></div>
+      <div class="pass pass-b h"><div class="cv-kick">LA FINAL · GRUPO 6</div><div class="cv-title">PULEVA<br>HEALTH</div><div class="cv-foot">IV HACKATHON UGR × LACTALIS PULEVA · GRUPO 6</div></div>
       <div class="cv-bottles">${['care', 'now', 'shield', 'creasnap', 'clearpro'].map((k) => `<img class="h" src="${IMG(k)}">`).join('')}</div>
       <div class="cv-hint" id="hint">PULSA <b>→</b> PARA IMPRIMIR</div>
       <div class="mini-roller" id="mr"></div>`,
@@ -370,6 +371,9 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
     ],
   },
 
+  // 6b ────────────────────────────────────────── POR QUÉ ESTOS TRES (figura 1 del informe)
+  MERCADO_SLIDE,
+
   // 7 ─────────────────────────────────────────── ACTIVE (Álex) + plano 3D del Crea-Snap
   {
     id: 'active', theme: 'paper', title: 'Active · para Álex (Crea-Snap)', speaker: 'David · demo (Jesús pulsa →)', time: '4:15–5:15', buyers: [true, 0],
@@ -378,8 +382,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
 → (se despiezan nuestras piezas reales) "Nuestra solución es guardarla en el tapón."
 → DEMO en vivo, máx. 15 s: pulsar el tapón y agitar. Pulsa → a la vez y el plano hace lo mismo (es el plan B si la demo falla).
    "Pulsas, agitas y bebes. Tres gramos activos, siempre. Pulsa, agita, entrena."
-→ CLEARPRO: "Y ClearPro: 20 gramos de proteína con textura de zumo, hecha con suero de Lactalis Ingredients, por menos de la mitad que un batido de referencia."
-→ "Y aquí vuelve la madre de Álex. Lo que le daba miedo no era la creatina, era un bote de polvo de una marca que no conocía. Cuando lo que ve es un botellín de Puleva junto a la leche, la conversación cambia."  (sello: CONSUMIDOR ✓)`,
+→ siguiente página: ClearPro.`,
     html: `${DEFS}
       <div class="bp-panel abs" id="bp">
         <div class="bp-grid"></div>
@@ -396,13 +399,6 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
         <div class="say h" id="s1">Disuelta en agua, la creatina <b>se degrada</b> y deja de servir. Por eso <span id="nolista">casi no existe creatina lista para beber</span>.</div>
         <div class="say h" id="s2">Nuestra solución:<br><b class="hl">guardarla en el tapón.</b></div>
         <div class="say h" id="s3"><span class="slam h">PULSAS.</span><span class="slam h" style="color:var(--pink)">AGITAS.</span><span class="slam h" style="color:var(--blue)">BEBES.</span><small>3 g de creatina activos, siempre.</small></div>
-        <div class="say h" id="s5">${bubble('<s>«Eso son polvos…»</s>', 'left', 'bubble-old')}<div class="marker newline">Un botellín de Puleva junto a la leche:<br><span style="color:var(--pink)">la conversación cambia.</span></div></div>
-      </div>
-      <div class="cp abs h" id="cp">
-        <img src="img/clearpro.webp">
-        <div><b>CLEARPRO</b><span>20 g de proteína con textura de zumo · suero de Lactalis Ingredients</span>
-          <div class="vs"><i style="width:${(2.19 / 4) * 100}%"></i><em>2,19 €</em></div>
-          <div class="vs vs-ref"><i style="width:100%"></i><em>4 € batido de referencia</em></div></div>
       </div>`,
     init(el, ctx) {
       try { ctx.bp = createBlueprint($(el, '#bpc'), $(el, '#bpl')); } catch (e) { console.warn(e); ctx.bp = null; }
@@ -420,14 +416,11 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
         t.add(stamp($(el, '#bps'), { rot: -4, quake: 0.5 }), 3.9);
         return t;
       },
-      (el) => tl().add(drop($(el, '#cp'), { from: -900, weight: 1.1 }))
-        .from($$(el, '#cp .vs i'), { width: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out' }, 0.7),
-      (el, ctx) => tl().to($(el, '#s3'), { autoAlpha: 0, duration: 0.3 })
-        .add(pop($(el, '#s5')))
-        .add(scrawl($(el, '#s5 .newline'), { dur: 1.2 }), 0.4)
-        .add(ctx.stampBuyer(0), 1.8),
     ],
   },
+
+  // 8 ─────────────────────────────────────────── CLEARPRO (página propia)
+  CLEARPRO_SLIDE,
 
   // 8 ─────────────────────────────────────────── POR QUÉ PULEVA
   {
@@ -543,57 +536,55 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
     ],
   },
 
+  // 9b ────────────────────────────────────────── EMBAJADORES (dentro de Lactalis, antes del break-even)
+  EMBAJADORES_SLIDE,
+
   // 10 ─────────────────────────────────────────── CONVENCER A LACTALIS
   {
-    id: 'lactalis', theme: 'graph', title: 'Convencer a Lactalis', speaker: 'David (+ Ismael mes 29, Jesús deslizador)', time: '7:00–8:15', buyers: [true, 2],
-    notes: `"Y por último, convencer a Lactalis. Con números prudentes. Invertimos 3 millones al año: dos en comercial y uno en medios."
-→ (barras) "Con una cuota que pasa del 4 al 13 %, la venta neta llega a 15,1 millones en el año 3…"
+    id: 'lactalis', theme: 'graph', title: 'Convencer a Lactalis', speaker: 'David (+ Ismael mes 29)', time: '7:40–8:40', buyers: [true, 2],
+    notes: `"Y por último, convencer a Lactalis. Con números prudentes."
+   (recuadro de hipótesis) "Partimos del mercado real: NielsenIQ, 119 millones en súper e híper, creciendo un 13, 12 y 10 %. Una cuota que pasa del 4 al 8 y al 13 %. La cadena se queda un 30 %. Puleva gana un 15 % en Daily y un 10 % en Active, lo estándar en el sector: Danone tiene un 8,5 % operativo en lácteos. E invertimos 3 millones al año: dos en comercial y uno en medios."
+→ (barras: debajo de cada año, mercado × cuota) "Con eso, la venta neta llega a 15,1 millones en el año 3…"
 → (línea) "…el EBITDA es positivo ese mismo año y el equilibrio mensual llega en el mes 29."
 → (pósit amarillo) "No os vamos a vender un pelotazo. El margen es ajustado, como en todo el sector lácteo, y la inversión se recupera hacia el año 7, lo habitual al crear una categoría nueva en gran consumo."
-→ (pósit rosa) "Y sabemos qué tiene que salir bien: fabricar Daily en planta propia. Con maquilador no es viable."
-→ (deslizador 13 → 15 %) "Con un 15 % de cuota, el EBITDA del año 3 se triplica."
-   El deslizador se puede tocar con el ratón si preguntan por la sensibilidad (11 / 13 / 15 %).`,
+→ (pósit rosa) "Y sabemos qué tiene que salir bien: fabricar Daily en planta propia. Con maquilador no es viable. Y con un 15 % de cuota, el EBITDA del año 3 se triplica."  (sello: LACTALIS ✓)
+Si preguntan: apéndice A1 (figura 7), A2 (tabla 7 e hipótesis) y A3 (sensibilidad).`,
     html: `${DEFS}
       <div class="mega abs h" id="h" style="left:110px;top:60px;font-size:100px">CONVENCER <span style="color:var(--pink)">A LACTALIS.</span></div>
-      <div class="marker abs h" id="k" style="left:115px;top:165px;font-size:44px;color:var(--blue)">con números prudentes</div>
-      <div class="chip abs h" id="ch1" style="left:640px;top:168px"><b>3 M€ / año</b> = 2 comercial + 1 medios</div>
-      <div class="chip abs h" id="ch2" style="left:1190px;top:168px">cuota <b>4 % → 8 % → 13 %</b></div>
       <svg class="abs" viewBox="0 0 1000 660" style="left:110px;top:290px;width:1000px;height:660px;overflow:visible" id="chart">
+        <g id="axes">${[[-2, '−2'], [5, '5'], [10, '10'], [15, '15']].map(([v, l]) => `<line x1="40" y1="${430 - v * 24}" x2="980" y2="${430 - v * 24}" class="ax-grid"/><text x="28" y="${430 - v * 24 + 8}" text-anchor="end" class="ax-t">${l}</text>`).join('')}
+          <text x="28" y="438" text-anchor="end" class="ax-t">0</text>
+          <path d="M40 46 V510" class="ax-line"/>
+          <text class="ax-title" transform="translate(-34 280) rotate(-90)" text-anchor="middle">millones de €</text>
+          <text class="ax-title" x="980" y="676" text-anchor="end">años desde el lanzamiento →</text>
+        </g>
         <line x1="40" y1="430" x2="980" y2="430" stroke="#000a1a" stroke-width="5" stroke-linecap="round"/>
         ${[[200, 3.78, 'Año 1'], [500, 8.47, 'Año 2'], [800, 15.13, 'Año 3']].map(([x, v, y]) => `
           <g class="stack" data-v="${v}">${Array.from({ length: Math.ceil(v) }, (_, b) => { const hgt = Math.min(1, v - b) * 24; return `<g class="brick h"><rect x="${x - 95}" y="${430 - b * 24 - hgt}" width="190" height="${Math.max(4, hgt - 3)}" rx="8" fill="url(#clayWhite)" stroke="rgba(2,43,80,0.35)" stroke-width="2"/>${hgt > 16 ? `<rect x="${x - 95}" y="${430 - b * 24 - hgt}" width="190" height="7" rx="4" fill="url(#clayBlue)"/><rect x="${x + 60}" y="${430 - b * 24 - hgt + 9}" width="22" height="${hgt - 14}" rx="5" fill="url(#clayPink)" opacity=".9"/>` : ''}</g>`; }).join('')}</g>
           <text class="bv h" x="${x}" y="${430 - v * 24 - 18}" text-anchor="middle" data-v="${v}">0</text>
-          <text class="yl" x="${x}" y="640" text-anchor="middle">${y}</text>`).join('')}
+          <text class="yl" x="${x}" y="578" text-anchor="middle">${y}</text>`).join('')}
+        ${[[200, '135,0', '4'], [500, '151,2', '8'], [800, '166,3', '13']].map(([x, m, c]) => `<text class="mk h" x="${x}" y="610" text-anchor="middle"><tspan x="${x}">mercado ${m} M€</tspan><tspan x="${x}" dy="24">× cuota ${c} %</tspan></text>`).join('')}
         <defs><pattern id="hatchB" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="12" fill="#140ec8" opacity=".55"/></pattern></defs>
-        <path id="eb" class="h" d="M200 538 L500 482 L800 422" fill="none" stroke="#e11d38" stroke-width="11" stroke-linecap="round"/>
-        ${[[200, 538, '−2,69'], [500, 482, '−1,29'], [800, 422, '+0,20']].map(([x, y, v]) => `<g class="ebp" opacity="0"><circle cx="${x}" cy="${y}" r="15" fill="url(#clayPink)"/><text x="${x + 20}" y="${y + 46}" class="ebv">${v}</text></g>`).join('')}
+        <path id="eb" class="h" d="M200 494.6 L500 461 L800 425.2" fill="none" stroke="#e11d38" stroke-width="11" stroke-linecap="round"/>
+        ${[[200, 494.6, '−2,69'], [500, 461, '−1,29'], [800, 425.2, '+0,20']].map(([x, y, v]) => `<g class="ebp" opacity="0"><circle cx="${x}" cy="${y}" r="15" fill="url(#clayPink)"/><text x="${x + 24}" y="${y + (v[0] === '+' ? -14 : 40)}" class="ebv">${v}</text></g>`).join('')}
         <text x="40" y="20" class="lg">VENTA NETA (1 brick = 1 M€) · <tspan fill="#e11d38">EBITDA (M€)</tspan></text>
       </svg>
-      <div class="abs" id="m29" style="left:${110 + 772 - 30}px;top:${290 + 430 - 30}px;width:60px;height:60px"></div>
+      <div class="abs" id="m29" style="left:${110 + 758 - 30}px;top:${290 + 430 - 30}px;width:60px;height:60px"></div>
       <div class="flipcal abs h" id="fc" style="left:1010px;top:640px"><div class="fc-top">MES</div><b id="fcn">1</b><div class="fc-ok h" id="fco">EQUILIBRIO</div></div>
-      <div class="postit p-yellow abs h" id="pi1" style="left:1250px;top:250px"><b>NO ES UN PELOTAZO.</b>Margen ajustado, como en todo el sector lácteo. La inversión se recupera hacia el <em>año 7</em>: lo habitual al crear una categoría.</div>
-      <div class="postit p-pink abs h" id="pi2" style="left:1270px;top:500px"><b>LO QUE TIENE QUE SALIR BIEN:</b>fabricar Daily en <em>planta propia</em>. Con maquilador, no es viable.</div>
-      <div class="slider abs h interactive" id="sl" style="left:1230px;top:730px">
-        <div class="sl-t">Cuota en el año 3 → EBITDA del año 3</div>
-        <div class="sl-track"><div class="sl-fill"></div>${[11, 13, 15].map((v) => `<button class="sl-stop" data-v="${v}">${v} %</button>`).join('')}<div class="sl-knob"></div></div>
-        <div class="sl-out"><b id="slv">+202,6 k€</b><span id="slx"></span></div>
-      </div>`,
-    init(el) {
-      const map = { 11: -254.7, 13: 202.6, 15: 659.9 };
-      const pos = { 11: 0, 13: 50, 15: 100 };
-      const o = { v: 202.6 };
-      const set = (q, dur = 0.8) => {
-        gsap.to($(el, '.sl-knob'), { left: `${pos[q]}%`, duration: dur, ease: 'back.out(1.6)' });
-        gsap.to($(el, '.sl-fill'), { width: `${pos[q]}%`, duration: dur });
-        gsap.to(o, { v: map[q], duration: dur, ease: 'power2.out', onUpdate: () => { $(el, '#slv').textContent = `${o.v > 0 ? '+' : '−'}${Math.abs(o.v).toFixed(1).replace('.', ',')} k€`; $(el, '#slv').classList.toggle('neg', o.v < 0); } });
-        $(el, '#slx').textContent = q === 15 ? '× 3' : q === 11 ? 'el equilibrio se retrasa al año 4' : 'caso base';
-        sfx.tick(1200 + q * 40, 0.15);
-      };
-      el._setQuota = set;
-      $$(el, '.sl-stop').forEach((b) => b.addEventListener('click', (e) => { e.stopPropagation(); sfx.unlock(); set(+b.dataset.v); }));
-    },
+      <div class="hyp-box abs h" id="hyp" style="left:1250px;top:190px;width:590px">
+        <div class="hyp-t">HIPÓTESIS DEL CASO BASE</div>
+        ${[['Mercado', 'NielsenIQ 2026: 119,5 M€, +13 / +12 / +10 % al año'], ['Cuota', 'sell-out 4 % → 8 % → 13 %'], ['Márgenes', 'cadena 30 % · Puleva <b>15 % Daily</b> y <b>10 % Active</b> <small>(Danone: 8,5 % en lácteos)</small>'], ['Inversión', '3 M€/año: 2 comercial + 1 medios']].map(([a, b], i) => `<div class="hyp-l h"><i>${i + 1}</i><b>${a}</b><span>${b}</span></div>`).join('')}
+      </div>
+      <div class="postit p-yellow abs h" id="pi1" style="left:1250px;top:560px;width:590px;font-size:26px"><b>NO ES UN PELOTAZO.</b>Margen ajustado, como en todo el sector lácteo. La inversión se recupera hacia el <em>año 7</em>.</div>
+      <div class="postit p-pink abs h" id="pi2" style="left:1265px;top:775px;width:575px;font-size:26px"><b>LO QUE TIENE QUE SALIR BIEN:</b>fabricar Daily en <em>planta propia</em>. Con un 15 % de cuota, el EBITDA del año 3 <em>× 3</em>.</div>`,
     steps: [
-      (el) => tl().add(misreg($(el, '#h'))).add(scrawl($(el, '#k')), 0.5).add(pop($(el, '#ch1')), 0.8).add(pop($(el, '#ch2'), { freq: 640 }), 1),
+      (el) => {
+        const t = tl().add(misreg($(el, '#h')))
+          .from($$(el, '#axes > *'), { opacity: 0, duration: 0.4, stagger: 0.04 }, 0.4)
+          .add(pop($(el, '#hyp')), 0.6);
+        $$(el, '.hyp-l').forEach((l, i) => t.add(reveal(l), 0.9 + i * 0.3));
+        return t;
+      },
       (el) => {
         const t = tl();
         let at = 0;
@@ -605,6 +596,7 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
             at += 0.055;
           });
           t.add(countUp($$(el, '.bv')[i], +$$(el, '.bv')[i].dataset.v, { dec: 2, dur: 0.6, sound: false }), at + 0.2);
+          t.add(reveal($$(el, '.mk')[i]), at + 0.2);
           at += 0.25;
         });
         return t;
@@ -624,37 +616,8 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
           } })
           .add(stamp($(el, '#fco'), { rot: -8, quake: 0.5 }));
       },
-      (el) => tapeOn($(el, '#pi1'), { rot: -3 }),
-      (el) => tapeOn($(el, '#pi2'), { rot: 2.5 }),
-      (el) => tl().add(pop($(el, '#sl'))).call(() => el._setQuota(13, 0.01)).call(() => el._setQuota(15, 1.2), null, '+=0.7'),
-    ],
-  },
-
-  // 11 ─────────────────────────────────────────── LA UNIDAD
-  {
-    id: 'unidad', theme: 'paper', title: 'Quién lo lleva', speaker: 'Jesús (+ Ismael UGR)', time: '8:15–8:45', buyers: [true, 2],
-    notes: `→ "Para llevarlo, una unidad de negocio con cuenta de resultados propia y cuatro perfiles: regulatorio y científico, KAM de gran distribución, brand manager y un tecnólogo de bebidas de la propia plantilla de I+D. El talento nuevo, de la UGR."
-→ (sello: LACTALIS ✓)`,
-    html: `
-      <div class="mega abs h" id="h" style="left:110px;top:60px;font-size:110px">¿QUIÉN <span style="color:var(--pink)">LO LLEVA?</span></div>
-      <svg class="abs h" id="orgs" viewBox="0 0 1700 300" style="left:110px;top:440px;width:1700px;height:300px;overflow:visible">
-        <path class="org" d="M850 0 V80 M212 80 H1488 M212 80 V150 M637 80 V150 M1062 80 V150 M1488 80 V150"/>
-      </svg>
-      <div class="unit abs h" id="u" style="left:560px;top:250px"><b>UNIDAD PULEVA HEALTH</b><span>cuenta de resultados propia</span></div>
-      ${[['Regulatorio y científico', 'claims, AESAN, evidencia'], ['KAM gran distribución', 'centrales de compra'], ['Brand manager', 'marca, embajadores, redes'], ['Tecnólogo de bebidas', 'de la plantilla de I+D']].map(([a, b], i) => `
-        <div class="role abs h" style="left:${110 + i * 425 - 100 + 112}px;top:600px"><b>${a}</b><span>${b}</span></div>`).join('')}
-      <div class="marker abs h" id="ugr" style="left:110px;top:880px;font-size:60px;color:var(--blue)">Y el talento nuevo, de la UGR.</div>`,
-    steps: [
-      (el) => misreg($(el, '#h')),
-      (el, ctx) => {
-        const t = tl().add(stamp($(el, '#u'), { rot: -1, quake: 0.4 }))
-          .set($(el, '#orgs'), { autoAlpha: 1 }, 0.3)
-          .fromTo($(el, '.org'), { drawSVG: '0%' }, { drawSVG: '100%', duration: 0.8 }, 0.3);
-        $$(el, '.role').forEach((r, i) => t.add(pop(r, { freq: 500 + i * 100 }), 0.9 + i * 0.18));
-        t.add(scrawl($(el, '#ugr')), 1.8);
-        t.add(ctx.stampBuyer(2), 2.8);
-        return t;
-      },
+      (el) => tapeOn($(el, '#pi1'), { rot: -2 }),
+      (el, ctx) => tl().add(tapeOn($(el, '#pi2'), { rot: 1.5 })).add(ctx.stampBuyer(2), '+=0.6'),
     ],
   },
 
@@ -706,4 +669,45 @@ Deja que la puerta se abra antes de decir "leche Puleva".`,
         .call(() => confetti(el), null, 3.8),
     ],
   },
+
+  // ─────────────────────────────────────────── APÉNDICE (datos para las preguntas)
+  ...APENDICE_SLIDES,
 ];
+
+// Fuentes de cada página (esquina inferior derecha). Todo sale de media/PulevaHealth_Grupo6.pdf.
+const SRC = {
+  lineal: 'Alimarket Gran Consumo (abr. 2026) · NielsenIQ, híper y súper, 52 semanas a sept. 2026 · fotos: lineal de Carrefour y Mercadona',
+  frenos: 'Schiele et al. (2013), Eur J Clin Pharmacol · Olza et al. (2017), estudio ANIBES, Nutrients',
+  idea: 'Solo declaraciones de salud autorizadas: Reg. (CE) 1924/2006 · EFSA (2010, 2015)',
+  daily: 'Claims autorizados por la EFSA · lactoferrina: Ali et al. (2021), metaanálisis · precios: Tabla 2 del informe',
+  mercado: 'NielsenIQ (2026), 52 semanas a sept. 2026 · Olza et al. (2017), ANIBES · IQVIA (2026), MAT ago. 2026',
+  active: 'Claim EFSA de la creatina (series breves de alta intensidad) · precio: Tabla 2 del informe',
+  clearpro: 'Precios consultados en nov. 2026: Carrefour.es (YoPro), prensa (Mercadona), tienda online (Myprotein) · pueden variar',
+  porque: 'Kantar Worldpanel, Brand Footprint 2025 · Instituto Puleva de Nutrición',
+  super: 'Margen de cadena 30 %: lácteos refrigerados premium (hipótesis 3) · presupuesto comercial: Tabla 3 del informe',
+  embajadores: 'Plan de medios del año 1 (Tabla 4) · segmentos objetivo (apartado 1.3) · embajadores sujetos a negociación',
+  lactalis: 'NielsenIQ (2026) + crecimiento 13/12/10 % · cuenta de resultados: Tabla 7 · Danone, resultados 2024 (feb. 2025)',
+  'apx-fig7': 'Figura 7 y Tabla 7 del informe',
+  'apx-t7': 'Tabla 7 del informe · NielsenIQ (2026) · Danone (2025) · asunciones del caso',
+  'apx-t8': 'Tabla 8 del informe',
+};
+SLIDES.forEach((s) => { if (SRC[s.id]) s.src = SRC[s.id]; });
+
+// Reparto y tiempos (presentacion/reparto.md): 9:00 como máximo, relevos que rotan.
+const SPK = {
+  familia: ['Ismael · Jesús = Carmen · David = Álex', '0:00–0:55'],
+  nevera: ['Ismael', '0:55–1:05'],
+  lineal: ['Jesús (+ David remata)', '1:05–1:40'],
+  frenos: ['Jesús · un freno cada uno', '1:40–2:10'],
+  idea: ['David · preguntas a tres voces + coro', '2:10–2:50'],
+  daily: ['Jesús (+ Ismael remata)', '2:50–3:35'],
+  mercado: ['Ismael', '3:35–4:10'],
+  active: ['David · demo (Jesús pulsa →)', '4:10–5:00'],
+  clearpro: ['David (+ Jesús = Carmen)', '5:00–5:30'],
+  porque: ['Ismael · una clave cada uno', '5:30–6:05'],
+  super: ['Jesús · Ismael = comprador', '6:05–6:50'],
+  embajadores: ['Ismael', '6:50–7:25'],
+  lactalis: ['David (+ Ismael mes 29)', '7:25–8:20'],
+  martes: ['Los tres · coro final', '8:20–9:00'],
+};
+SLIDES.forEach((s) => { if (SPK[s.id]) [s.speaker, s.time] = SPK[s.id]; });

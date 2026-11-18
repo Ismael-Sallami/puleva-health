@@ -69,7 +69,7 @@
 
 > Pulsas, agitas y bebes. Tres gramos activos, siempre. *Pulsa, agita, entrena.*
 >
-> *[ClearPro]* Y **ClearPro**: 20 gramos de proteína con textura de zumo, hecha con suero de Lactalis Ingredients, por menos de la mitad que un batido de referencia.
+> *[ClearPro]* Y **ClearPro**: 20 gramos de proteína con textura de zumo, hecha con suero de Lactalis Ingredients, a 2,19 €: más barata que un YoPro y que la proteína clear que hoy solo se compra online.
 >
 > Y aquí vuelve la madre de Álex. Lo que le daba miedo no era la creatina, era un bote de polvo de una marca que no conocía. Cuando lo que ve es un botellín de Puleva junto a la leche, la conversación cambia.
 

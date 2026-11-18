@@ -32,7 +32,7 @@ Si no sabéis algo: *"No lo tenemos calculado; lo que sí sabemos es…"* y pasa
 > 3 M€ al año de comercial y medios (2 + 1), 500.000 € para adaptar la línea propia, 800.000 € de arrancada con el maquilador para Active, y 350.000 € al año en personal. La inversión acumulada a recuperar al final del año 3 es de 5,07 M€.
 
 **¿No es caro? Un pack de Daily cuesta 6,49 €.**
-> Por toma son entre 1,08 y 1,25 €: menos que un café en la barra. Ya bajamos el PVP entre un 10 y un 17 % para competir por volumen. Crea-Snap (1,79 €) y ClearPro (2,19 €) cuestan menos de la mitad que un batido RTD de referencia (4 €). Es precio de cesta, no de farmacia.
+> Por toma son entre 1,08 y 1,25 €: menos que un café en la barra. Ya bajamos el PVP entre un 10 y un 17 % para competir por volumen. Crea-Snap cuesta 1,79 € y ClearPro 2,19 €: menos que un YoPro (2,69 € en Carrefour) o una proteína clear online como Myprotein (unos 3 €). La marca blanca es más barata, pero no es clear ni es Puleva. Es precio de cesta, no de farmacia.
 
 ---
 
