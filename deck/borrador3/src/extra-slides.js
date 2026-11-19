@@ -362,4 +362,67 @@ Con un 15 % de cuota, el EBITDA del año 3 se triplica (+659,9 k€). Si la cuot
   ],
 };
 
-export const APENDICE_SLIDES = [APX_FIG7, APX_T7, APX_T8];
+// A4 · Escandallo por bote (año 3)
+// Cuadra con la Tabla 7: cadena 30 % del PVP; margen bruto de Puleva 15 % del PVP en Daily y 10 % en Active, así que el
+// coste de producto es el 55 % y el 60 % del PVP. Su desglose (activos, envase, fabricación…) es una estimación del equipo.
+// El escandallo por unidad incluye la amortización, porque va ligada a cada línea: la línea propia (500 k€/5 años) a los
+// 14,26 M de shots Daily y la arrancada del maquilador (800 k€/3 años) a los 2,72 M de botes Active. Los costes de
+// estructura (comercial, marketing y personal) van en total, como en la Tabla 7, sin repartirlos por bote.
+const ESC_TOT = [
+  ['Margen bruto', '+2.972,6', 'k'], ['Comercial', '−1.300,0', 'm'], ['Marketing', '−1.000,0', 'm'], ['Personal y calidad', '−470,0', 'm'],
+  ['EBITDA', '+202,6', 't'], ['Amortización', '−366,7', 'm'], ['EBIT', '−164,1', 'e'],
+];
+const ESC_COLS = [
+  ['now', 'Now', '80 ml · planta propia'],
+  ['care', 'Care', '100 ml · planta propia'],
+  ['shield', 'Shield', '60 ml · planta propia'],
+  ['creasnap', 'Crea-Snap', '80 ml · maquilador'],
+  ['clearpro', 'ClearPro', '125 ml · maquilador'],
+];
+// [etiqueta, valores por producto, tipo] · tipo: p = precio, m = resta, t = subtotal, k = clave, d = detalle del coste
+const ESC_ROWS = [
+  ['PVP (precio en el lineal)', [1.08, 1.08, 1.25, 1.79, 2.19], 'p'],
+  ['− Margen de la cadena (30 %)', [-0.324, -0.324, -0.375, -0.537, -0.657], 'm'],
+  ['= Venta neta Puleva', [0.756, 0.756, 0.875, 1.253, 1.533], 't'],
+  ['Activos (minerales, vitaminas, lactoferrina, creatina, suero)', [-0.09, -0.05, -0.17, -0.06, -0.50], 'd'],
+  ['Base láctea / líquido y aromas', [-0.06, -0.07, -0.05, -0.03, -0.04], 'd'],
+  ['Envase: botellín RPET, tapón, etiqueta y pack', [-0.16, -0.17, -0.16, -0.38, -0.14], 'd'],
+  ['Fabricación y calidad (planta propia) · maquila', [-0.12, -0.12, -0.12, -0.51, -0.46], 'd'],
+  ['Logística (frío en Daily · ambiente en Active)', [-0.10, -0.11, -0.10, -0.06, -0.07], 'd'],
+  ['Mermas y caducidad', [-0.064, -0.074, -0.0875, -0.034, -0.104], 'd'],
+  ['= Margen bruto Puleva (15 % Daily · 10 % Active)', [0.162, 0.162, 0.1875, 0.179, 0.219], 't'],
+  ['− Amortización (línea propia · arrancada del maquilador)', [-0.007, -0.007, -0.007, -0.0982, -0.0982], 'm'],
+  ['= Margen tras amortización', [0.155, 0.155, 0.1805, 0.0808, 0.1208], 'k'],
+];
+const eur = (v, dec) => `${v < 0 ? '−' : ''}${Math.abs(v).toFixed(dec).replace('.', ',')}`;
+const APX_ESC = {
+  id: 'apx-escandallo', theme: 'paper', title: 'Apéndice · Escandallo por bote (año 3)', speaker: 'Jesús (solo si preguntan)', time: 'apéndice',
+  notes: `Escandallo por bote en el año 3, en euros por unidad, hasta el margen bruto (lo estándar en gran consumo).
+- La cadena se queda el 30 % del PVP. El coste de producto es el 55 % del PVP en Daily y el 60 % en Active (margen de Puleva: 15 % y 10 %).
+- El desglose del coste (activos, envase, fabricación, logística, mermas) es una estimación del equipo; lo que está en el informe es el total.
+- Margen bruto por bote: 16–19 céntimos en Daily y 18–22 en Active.
+- Amortización por unidad: línea propia 500 k€/5 años entre 14,3 M de shots = 0,7 céntimos; arrancada del maquilador 800 k€/3 años entre 2,7 M de botes Active = 9,8 céntimos. Tras amortizar: 15–18 céntimos por shot Daily y 8–12 por bote Active.
+- Debajo, la cuenta del año 3 en total (Tabla 7): el margen bruto de todos los botes (2,97 M€) cubre comercial (1,3 M€), marketing (1 M€) y personal (0,47 M€): EBITDA +202,6 k€. Tras amortizar la arrancada del maquilador (800 k€ en 3 años) y la línea propia (500 k€ en 5), EBIT −164,1 k€; pasa a positivo en el año 4, cuando la arrancada ya está amortizada.
+Si preguntan por qué no se reparten los fijos por bote: son costes de estructura que no dependen de cuántos botes se venden; se cubren con volumen.`,
+  html: `${apxHead('A4', 'ESCANDALLO POR BOTE · AÑO 3', 'Euros por unidad, con la amortización de cada línea · debajo, la estructura en total (Tabla 7)')}
+    <div class="esc abs" style="left:110px;top:250px;width:1700px">
+      <div class="esc-r esc-h"><span></span>${ESC_COLS.map(([k, n, f]) => `<span><img src="${IMG(k)}"><b>${n}</b><small>${f}</small></span>`).join('')}</div>
+      ${ESC_ROWS.map(([l, vs, t]) => `<div class="esc-r esc-${t} h"><span>${l}</span>${vs.map((v) => `<span class="${v < 0 && (t === 't' || t === 'k') ? 'neg' : ''}">${eur(v, t === 'p' ? 2 : 3)}</span>`).join('')}</div>`).join('')}
+    </div>
+    <div class="esc-tot abs h" id="esct">
+      <div class="esc-tt">AÑO 3 · CUENTA EN TOTAL (miles de €) · comercial, marketing y personal no se reparten por bote</div>
+      <div class="esc-trow">${ESC_TOT.map(([l, v, t]) => `<div class="esc-tc esc-tc-${t}"><span>${l}</span><b>${v}</b></div>`).join('')}</div>
+    </div>
+    <div class="esc-note abs h" id="escn"><b>Tras amortizar: 15–18 céntimos por shot Daily y 8–12 por bote Active.</b> El volumen cubre la estructura; EBIT positivo en el año 4.</div>`,
+  steps: [
+    apxIntro,
+    (el) => tl().from($(el, '.esc-h'), { autoAlpha: 0, y: 10, duration: 0.3 })
+      .set($$(el, '.esc-p, .esc-m, .esc-t').slice(0, 3), { autoAlpha: 1 }, 0.1)
+      .from($$(el, '.esc-r.h').slice(0, 3), { autoAlpha: 0, x: -20, duration: 0.25, stagger: 0.12 }, 0.1)
+      .call(() => sfx.tick(900, 0.14), null, 0.1),
+    (el) => { const r = $$(el, '.esc-r.h').slice(3, 12); return tl().set(r, { autoAlpha: 1 }).from(r, { autoAlpha: 0, x: -20, duration: 0.22, stagger: 0.09 }).call(() => sfx.printer(7, 0.09), null, 0); },
+    (el) => { const t = tl().add(reveal($(el, '#esct'))); $$(el, '.esc-tc').forEach((c, i) => t.from(c, { autoAlpha: 0, y: 16, duration: 0.25 }, 0.2 + i * 0.15)); return t.add(pop($(el, '#escn'), { freq: 640 }), 1.4); },
+  ],
+};
+
+export const APENDICE_SLIDES = [APX_FIG7, APX_T7, APX_T8, APX_ESC];

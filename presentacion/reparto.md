@@ -23,7 +23,7 @@
 | 13 | Lactalis · los números | Ismael | 7:20 | 1:00 |
 | 14 | Un martes por la mañana | Jesús | 8:20 | 0:40 |
 | | **Fin** | | **9:00** | |
-| A1–A3 | Apéndice (solo si preguntan) | Jesús | | |
+| A1–A4 | Apéndice (solo si preguntan) | Jesús | | |
 
 **Orden de los relevos:** Ismael (1–2) → Jesús (3–4) → David (5 y Now) → Jesús (Care) → Ismael (Shield, 7 y 8) → Jesús (9–10) → David (11–12) → Ismael (13) → Jesús (14).
 
@@ -83,7 +83,7 @@ Súper: rotación, tráfico, 30 % de margen y una categoría nueva; nevera de l�
 Carmen se toma su Now, Álex mete un Crea-Snap en la mochila y en la nevera está Shield. *"Nadie ha tomado una pastilla. Nadie ha pesado polvos. Solo han abierto la nevera."* *"Puleva Health. Salud que se bebe. Gracias."*
 
 ### Apéndice · solo si preguntan · **JESÚS**
-**A1 · Figura 7**, **A2 · Tabla 7 e hipótesis** y **A3 · Sensibilidad**. Se salta desde la vista de ponente (`P`).
+**A1 · Figura 7**, **A2 · Tabla 7 e hipótesis**, **A3 · Sensibilidad** y **A4 · Escandallo por bote**. Se salta desde la vista de ponente (`P`).
 
 ---
 

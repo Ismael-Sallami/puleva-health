@@ -689,6 +689,7 @@ const SRC = {
   'apx-fig7': 'Figura 7 y Tabla 7 del informe',
   'apx-t7': 'Tabla 7 del informe · NielsenIQ (2026) · Danone (2025) · asunciones del caso',
   'apx-t8': 'Tabla 8 del informe',
+  'apx-escandallo': 'Tabla 2 (PVP y márgenes) y Tabla 7 del informe · desglose del coste de producto: estimación del equipo',
 };
 SLIDES.forEach((s) => { if (SRC[s.id]) s.src = SRC[s.id]; });
 
@@ -711,5 +712,6 @@ const SPK = {
   'apx-fig7': ['Jesús (solo si preguntan)', 'apéndice'],
   'apx-t7': ['Jesús (solo si preguntan)', 'apéndice'],
   'apx-t8': ['Jesús (solo si preguntan)', 'apéndice'],
+  'apx-escandallo': ['Jesús (solo si preguntan)', 'apéndice'],
 };
 SLIDES.forEach((s) => { if (SPK[s.id]) [s.speaker, s.time] = SPK[s.id]; });

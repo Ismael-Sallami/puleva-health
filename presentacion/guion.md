@@ -20,7 +20,7 @@
 | 12 | Lactalis · 1 M€ en medios | 6:45–7:20 | David | Comercial / marketing |
 | 13 | Lactalis · los números | 7:20–8:20 | Ismael | Business case |
 | 14 | Un martes por la mañana | 8:20–9:00 | Jesús | — |
-| A1–A3 | Apéndice (solo si preguntan) | — | Jesús | Business case |
+| A1–A4 | Apéndice (solo si preguntan) | — | Jesús | Business case |
 
 ---
 
@@ -158,6 +158,7 @@ Después del Gracias hay tres páginas para las preguntas:
 - **A1 · Figura 7:** venta neta y EBITDA, break-even en el mes 29 y 5,07 M€ de inversión a recuperar hacia el año 7.
 - **A2 · Tabla 7 e hipótesis:** la cuenta de resultados completa y las cinco hipótesis (mercado, cuota, margen de la cadena, margen de Puleva e inversiones).
 - **A3 · Tabla 8:** sensibilidad. Daily con maquilador (−608 k€), Daily al 20 %, y cuota del 11 % y del 15 %.
+- **A4 · Escandallo por bote (año 3):** de PVP a margen por unidad, incluida la amortización de cada línea. La cadena se queda el 30 %; el coste de producto es el 55 % del PVP en Daily y el 60 % en Active, desglosado en activos, base, envase, fabricación o maquila, logística y mermas. El margen bruto es de 16–22 céntimos por bote. La amortización de la línea propia (500 k€/5 años) cuesta 0,7 céntimos por shot Daily, y la arrancada del maquilador (800 k€/3 años), 9,8 céntimos por bote Active: tras amortizar quedan 15–18 céntimos en Daily y 8–12 en Active. Comercial, marketing y personal van en total, como en la Tabla 7: EBITDA +202,6 k€ y EBIT −164,1 k€, que pasa a positivo en el año 4.
 
 Se salta a ellas desde la vista de ponente (`P`).
 
